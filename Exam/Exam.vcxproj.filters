@@ -28,26 +28,62 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Header Files\SystemVariable">
+      <UniqueIdentifier>{62cd76f5-aa6a-4bb8-a630-ab27ff46b158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SystemVariable">
+      <UniqueIdentifier>{d64d0461-074b-45b8-93fb-8f656d512b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Etc">
+      <UniqueIdentifier>{962fccfa-b35a-4f77-a24d-a87f54048181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Etc">
+      <UniqueIdentifier>{cc2d15bb-a2c0-4a69-8e37-87b8bcf7410a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Function">
+      <UniqueIdentifier>{a593dfe9-9846-49d4-9d4c-4ef965000213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Function">
+      <UniqueIdentifier>{f3c97d5a-f022-4e98-99ae-e87dd033c636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface">
+      <UniqueIdentifier>{6b89cafe-8e94-418a-b4f7-577e0b9a045d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interface">
+      <UniqueIdentifier>{36370664-8768-4306-9ce3-43810f7a1772}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SystemVariable.cpp">
+      <Filter>Source Files\SystemVariable</Filter>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckVersion.cpp">
+      <Filter>Source Files\Function</Filter>
     </ClCompile>
     <ClCompile Include="ExamClient.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SystemVariable.h">
+      <Filter>Header Files\SystemVariable</Filter>
+    </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Etc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ExamClient.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Interface</Filter>
+    </QtMoc>
+    <QtMoc Include="CheckVersion.h">
+      <Filter>Header Files\Function</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
