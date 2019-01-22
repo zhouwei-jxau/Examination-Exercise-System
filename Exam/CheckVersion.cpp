@@ -44,6 +44,7 @@ void CheckVersion::requestFinished(QNetworkReply * replay)
 		{
 			QMessageBox messageBox;
 			messageBox.about(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("请更新到最新版本"));
+			QApplication::quit();
 		}
 	}
 	else
