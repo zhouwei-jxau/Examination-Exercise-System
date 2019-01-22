@@ -49,7 +49,8 @@ void CheckVersion::requestFinished(QNetworkReply * replay)
 	else
 	{
 		QMessageBox messageBox;
-		messageBox.about(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("网络连接失败!请检查网络连接。"));
+		messageBox.about(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("无法连接到服务器!请检查网络连接。"));
+		QApplication::quit();
 	}
 }
 
