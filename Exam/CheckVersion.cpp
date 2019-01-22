@@ -17,7 +17,7 @@ CheckVersion::CheckVersion()
  	this->setFixedWidth(800);
 	this->setFixedHeight(100);
 	this->move(QApplication::desktop()->width() / 2-this->width()/2, QApplication::desktop()->height() / 2-this->height()/2);
-	this->setWindowFlags(Qt::WindowFlags::enum_type::FramelessWindowHint);
+	this->setWindowFlags(Qt::WindowFlags::enum_type::FramelessWindowHint| Qt::WindowFlags::enum_type::Tool);
 	httpManager = new QNetworkAccessManager(this);
 	QObject::connect(httpManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(requestFinished(QNetworkReply*)));
 	QString url = QString("http://") + SystemVariable::SERVER + ":" + QString::number(SystemVariable::SERVERPORT) + "/" + SystemVariable::CHECKVERSIONSERVLET;
