@@ -1,5 +1,6 @@
 #pragma once
 #include <qmainwindow.h>
+#include <Login.h>
 class CheckVersion :
 	public QMainWindow
 {

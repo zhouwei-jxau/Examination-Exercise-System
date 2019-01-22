@@ -27,7 +27,8 @@ CheckVersion::CheckVersion()
 
 
 CheckVersion::~CheckVersion()
-{  
+{
+	qDebug() << QString::fromLocal8Bit("CheckVersionÒÑÍË³ö");
 }
 
 void CheckVersion::requestFinished(QNetworkReply * replay)
@@ -38,7 +39,9 @@ void CheckVersion::requestFinished(QNetworkReply * replay)
 	{
 		if (latestVersion == SystemVariable::VERSION)
 		{
-
+			Login *login=new Login();
+			login->show();
+			this->close();
 		}
 		else
 		{
