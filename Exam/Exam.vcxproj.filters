@@ -47,6 +47,12 @@
     <Filter Include="Header Files\Interface">
       <UniqueIdentifier>{36370664-8768-4306-9ce3-43810f7a1772}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Widget">
+      <UniqueIdentifier>{893f52b9-bc0b-4849-80c7-9e57bb2cbcf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Widget">
+      <UniqueIdentifier>{79849c85-b046-45a8-b1d8-72d5593956b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,6 +73,12 @@
     <ClCompile Include="Login.cpp">
       <Filter>Source Files\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Regist.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkButton.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -75,9 +87,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files\Etc</Filter>
     </ClInclude>
-    <ClInclude Include="Login.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ExamClient.h">
@@ -85,6 +94,15 @@
     </QtMoc>
     <QtMoc Include="CheckVersion.h">
       <Filter>Header Files\Function</Filter>
+    </QtMoc>
+    <QtMoc Include="LinkButton.h">
+      <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="Regist.h">
+      <Filter>Header Files\Interface</Filter>
+    </QtMoc>
+    <QtMoc Include="Login.h">
+      <Filter>Header Files\Interface</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

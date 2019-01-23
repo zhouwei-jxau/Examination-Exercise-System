@@ -9,7 +9,7 @@ Login::Login()
 	this->imageHeadpartrait->setFixedSize(QSize(90, 90));
 	this->checkBoxRemeberPassword = new QCheckBox();
 	this->checkBoxRemeberPassword->setText(QString::fromLocal8Bit("¼Ç×¡ÃÜÂë"));
-	this->linkButtonRegist = new QLabel();
+	this->linkButtonRegist = new LinkButton();
 	this->linkButtonRegist->setText(QString::fromLocal8Bit("×¢²áÕËºÅ"));
 	this->linkButtonRegist->setFixedHeight(30);
 	this->editId = new QLineEdit();
@@ -27,7 +27,7 @@ Login::Login()
 	this->setCentralWidget(new QWidget());
 	QGridLayout* layout = new QGridLayout();
 	layout->setSpacing(8);
-	layout->setContentsMargins(20, 30,10, 40);
+	layout->setContentsMargins(20, 50,10, 20);
 	layout->addWidget(this->imageHeadpartrait, 0, 0, 3, 1, Qt::AlignTop);
 	layout->addWidget(this->editId, 0, 1,1,3, Qt::Alignment::enum_type::AlignTop);
 	layout->addWidget(this->linkButtonRegist, 0, 2,1,1, Qt::AlignLeft | Qt::AlignBottom);
@@ -35,7 +35,7 @@ Login::Login()
 	layout->addWidget(this->checkBoxRemeberPassword, 2, 1,1,1, Qt::AlignVCenter | Qt::AlignLeft);
 	layout->addWidget(this->buttonLogin, 3, 1, 2, 1, Qt::AlignLeft);
 	this->centralWidget()->setLayout(layout);
-
+	connect(this->linkButtonRegist, SIGNAL(clicked()), this, SLOT(slotRegist()));
 }
 
 Login::Login(QWidget *parent, Qt::WindowFlags flags)
@@ -47,4 +47,11 @@ Login::Login(QWidget *parent, Qt::WindowFlags flags)
 
 Login::~Login()
 {
+}
+
+void Login::slotRegist()
+{
+	qDebug() << QString::fromLocal8Bit("µã»÷ÁË×¢²á°´Å¥");
+	Regist* regist = new Regist(this);
+	regist->show();
 }
