@@ -85,6 +85,9 @@
     <ClCompile Include="LinkButton.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
+    <ClCompile Include="SelectExercise.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files\Interface</Filter>
     </QtMoc>
     <QtMoc Include="Login.h">
+      <Filter>Header Files\Interface</Filter>
+    </QtMoc>
+    <QtMoc Include="SelectExercise.h">
       <Filter>Header Files\Interface</Filter>
     </QtMoc>
   </ItemGroup>

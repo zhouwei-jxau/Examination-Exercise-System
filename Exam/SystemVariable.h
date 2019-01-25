@@ -7,6 +7,7 @@ public:
 	const static char* const SERVER;
 	const static char* const CHECKVERSIONSERVLET;
 	const static char* const REGISTSERVLET;
+	const static char* const LOGINSERVLET;
 public:
 	SystemVariable();
 	~SystemVariable();

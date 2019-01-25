@@ -74,14 +74,29 @@ void Regist::slotRegist()
 	QObject::connect(httpManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(requestFinished(QNetworkReply*)));
 	QString url = QString("http://") + SystemVariable::SERVER + ":" + QString::number(SystemVariable::SERVERPORT) + "/" + SystemVariable::REGISTSERVLET;
 	request.setUrl(url);
-	reply = httpManager->post(request,("username="+this->editUsername->text()+"&password="+this->editPassword->text()).toLocal8Bit());
+	request.setHeader(QNetworkRequest::KnownHeaders::ContentTypeHeader, "application/x-www-form-urlencoded");
+	QCryptographicHash md5(QCryptographicHash::Md5);
+	md5.addData(this->editPassword->text().toLocal8Bit());
+	reply = httpManager->post(request,("username="+this->editUsername->text()+"&password="+md5.result().toHex()).toLocal8Bit());
 }
 
 void Regist::requestFinished(QNetworkReply*reply)
 {
 	QByteArray data=reply->readAll();
 	QString msg = QString(data);
-
+	QJsonDocument jsonDocument=QJsonDocument::fromJson(msg.toLocal8Bit());
+	QJsonObject jsonObejct=jsonDocument.object();
+	int responseCode=jsonObejct.value("responseCode").toInt();
+	if (!responseCode)
+	{
+		QString account = jsonObejct.value("data").toString();
+		this->labelTip->setText(QString::fromLocal8Bit("×¢²á³É¹¦£¬ÄúµÄÕËºÅÎª:") + account);
+	}
+	else
+	{
+		QString msg = jsonObejct.value("msg").toString();
+		this->labelTip->setText(QString::fromLocal8Bit("×¢²áÊ§°Ü:") + msg);
+	}
 }
 
 void Regist::slotBackToLogin()

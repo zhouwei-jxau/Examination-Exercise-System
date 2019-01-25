@@ -4,4 +4,5 @@
 #include <qnetworkrequest.h>
 #include <qnetworkreply.h>
 #include <qlineedit.h>
+#include <qcryptographichash.h>
 #include "SystemVariable.h"

@@ -2,6 +2,7 @@
 #include <qmainwindow.h>
 #include "LinkButton.h"
 #include "Regist.h"
+#include "SelectExercise.h"
 class Login :
 	public QMainWindow
 {
@@ -12,6 +13,8 @@ public:
 	~Login();
 private slots:
 	void slotRegist();
+	void slotLogin();
+	void requestFinished(QNetworkReply*reply);
 private:
 	QLabel* imageHeadpartrait;
 	LinkButton* linkButtonRegist;
@@ -20,5 +23,10 @@ private:
 	QLineEdit* editId;
 	QLineEdit* editPassword;
 	QPushButton* buttonLogin;
+	QLabel* labelTip;
+
+	QNetworkAccessManager* httpManager;
+	QNetworkRequest request;
+	QNetworkReply* reply;
 };
 
