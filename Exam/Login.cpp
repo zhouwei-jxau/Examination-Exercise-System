@@ -42,6 +42,29 @@ Login::Login()
 	this->centralWidget()->setLayout(layout);
 	connect(this->linkButtonRegist, SIGNAL(clicked()), this, SLOT(slotRegist()));
 	connect(this->buttonLogin, SIGNAL(clicked()), this, SLOT(slotLogin()));
+
+	//读取用户名，密码
+	QDir dir(QString::fromLocal8Bit(SystemVariable::CONFIGPATH));
+	if (dir.exists())
+	{
+		QString path = dir.currentPath() + dir.path() + "/" + SystemVariable::USERFILENAME;
+		QFile file(path);
+		if (file.exists())
+		{
+			file.open(QFile::ReadWrite);
+			if (file.size() > 0)
+			{
+				QString data = file.readAll();
+				QString id = data.split("\n")[0];
+				QString password = data.split("\n")[1];
+				this->editId->setText(id);
+				this->editPassword->setText(password);
+				this->checkBoxRemeberPassword->setChecked(true);
+			}
+			file.close();
+		}
+	}
+
 }
 
 Login::Login(QWidget *parent, Qt::WindowFlags flags)
@@ -74,6 +97,38 @@ void Login::requestFinished(QNetworkReply*reply)
 	int responseCode = json.value("responseCode").toInt();
 	if (responseCode == 0)
 	{
+		if (this->checkBoxRemeberPassword->isChecked())
+		{
+			//如果勾选了记住密码，那么保存当前用户
+			QDir dir(QString::fromLocal8Bit(SystemVariable::CONFIGPATH));
+			if (!dir.exists())
+			{
+				dir.mkdir(dir.path());
+			}
+			QString path = dir.currentPath()+dir.path() +"/"+ SystemVariable::USERFILENAME;
+			QFile file(path);
+			file.open(QIODevice::OpenMode::enum_type::ReadWrite);
+			file.write((this->editId->text() + "\n" + this->editPassword->text()).toLocal8Bit());
+			file.close();
+		}
+		else
+		{
+			//如果没有勾选记住密码，那么删除当前用户
+			QDir dir(QString::fromLocal8Bit(SystemVariable::CONFIGPATH));
+			if (!dir.exists())
+			{
+				dir.mkdir(dir.path());
+			}
+			QString path = dir.currentPath() + dir.path() + "/" + SystemVariable::USERFILENAME;
+			QFile file(path);
+			if (file.exists())
+			{
+				file.open(QFile::ReadWrite);
+				file.resize(0);
+				file.close();
+			}
+		}
+
 		SelectExercise* selectExercise = new SelectExercise();
 		selectExercise->show();
 		this->close();

@@ -9,6 +9,8 @@ public:
 	const static char* const REGISTSERVLET;
 	const static char* const LOGINSERVLET;
 	const static char* const GETEXERCISESET;
+	const static char* const CONFIGPATH;
+	const static char* const USERFILENAME;
 public:
 	SystemVariable();
 	~SystemVariable();
