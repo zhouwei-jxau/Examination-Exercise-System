@@ -8,7 +8,10 @@ Login::Login()
 	this->imageHeadpartrait->setPixmap(QPixmap("Resources\\default\\icon\\headpartrait.jpg"));
 	this->imageHeadpartrait->setFixedSize(QSize(90, 90));
 	this->checkBoxRemeberPassword = new QCheckBox();
+	this->checkBoxRemeberPassword->setFixedWidth(90);
 	this->checkBoxRemeberPassword->setText(QString::fromLocal8Bit("¼Ç×¡ÃÜÂë"));
+	this->checkBoxAutoLogin = new QCheckBox();
+	this->checkBoxAutoLogin->setText(QString::fromLocal8Bit("×Ô¶¯µÇÂ¼"));
 	this->linkButtonRegist = new LinkButton();
 	this->linkButtonRegist->setText(QString::fromLocal8Bit("×¢²áÕËºÅ"));
 	this->linkButtonRegist->setFixedHeight(30);
@@ -22,7 +25,7 @@ Login::Login()
 	this->buttonLogin = new QPushButton();
 	this->buttonLogin->setFixedSize(QSize(200, 40));
 	this->buttonLogin->setText(QString::fromLocal8Bit("µÇÂ¼"));
-	this->setFixedSize(QSize(400, 260));
+	this->setFixedSize(QSize(420, 260));
 	this->labelTip = new QLabel();
 	QPalette palette = this->labelTip->palette();
 	palette.setColor(QPalette::Foreground, QColor(255, 0, 0));
@@ -34,9 +37,16 @@ Login::Login()
 	layout->setContentsMargins(20, 40,10, 10);
 	layout->addWidget(this->imageHeadpartrait, 0, 0, 3, 1, Qt::AlignTop);
 	layout->addWidget(this->editId, 0, 1,1,3, Qt::Alignment::enum_type::AlignTop);
-	layout->addWidget(this->linkButtonRegist, 0, 2,1,1, Qt::AlignLeft | Qt::AlignBottom);
+	layout->addWidget(this->linkButtonRegist, 0, 2,1,1, Qt::AlignLeft | Qt::AlignVCenter);
 	layout->addWidget(this->editPassword, 1, 1,1,3, Qt::Alignment::enum_type::AlignBottom);
-	layout->addWidget(this->checkBoxRemeberPassword, 2, 1,1,1, Qt::AlignVCenter | Qt::AlignLeft);
+	QHBoxLayout* layoutCheckBox = new QHBoxLayout();
+	layoutCheckBox->addWidget(this->checkBoxRemeberPassword);
+	layoutCheckBox->addWidget(this->checkBoxAutoLogin);
+	layoutCheckBox->setContentsMargins(0, 0, 0, 0);
+	layoutCheckBox->setAlignment(Qt::AlignLeading);
+	QWidget* widgetCheckBox = new QWidget();
+	widgetCheckBox->setLayout(layoutCheckBox);
+	layout->addWidget(widgetCheckBox, 2, 1,1,3, Qt::AlignVCenter | Qt::AlignLeft);
 	layout->addWidget(this->buttonLogin, 3, 1, 2, 1, Qt::AlignLeft|Qt::AlignTop);
 	layout->addWidget(this->labelTip, 4, 1, 1, 1, Qt::AlignLeft|Qt::AlignTop);
 	this->centralWidget()->setLayout(layout);
@@ -47,6 +57,7 @@ Login::Login()
 	QDir dir(QString::fromLocal8Bit(SystemVariable::CONFIGPATH));
 	if (dir.exists())
 	{
+		QString isAutoLogin = "0";
 		QString path = dir.currentPath() + dir.path() + "/" + SystemVariable::USERFILENAME;
 		QFile file(path);
 		if (file.exists())
@@ -57,14 +68,19 @@ Login::Login()
 				QString data = file.readAll();
 				QString id = data.split("\n")[0];
 				QString password = data.split("\n")[1];
+				isAutoLogin = data.split("\n")[2];
 				this->editId->setText(id);
 				this->editPassword->setText(password);
 				this->checkBoxRemeberPassword->setChecked(true);
 			}
 			file.close();
+			if (isAutoLogin == "1")
+			{
+				this->checkBoxAutoLogin->setChecked(true);
+				slotLogin();
+			}
 		}
 	}
-
 }
 
 Login::Login(QWidget *parent, Qt::WindowFlags flags)
@@ -108,7 +124,16 @@ void Login::requestFinished(QNetworkReply*reply)
 			QString path = dir.currentPath()+dir.path() +"/"+ SystemVariable::USERFILENAME;
 			QFile file(path);
 			file.open(QIODevice::OpenMode::enum_type::ReadWrite);
-			file.write((this->editId->text() + "\n" + this->editPassword->text()).toLocal8Bit());
+			QString data = this->editId->text() + "\n" + this->editPassword->text();
+			if (this->checkBoxAutoLogin->isChecked())
+			{
+				data = data + "\n1";
+			}
+			else
+			{
+				data = data + "\n0";
+			}
+			file.write((data).toLocal8Bit());
 			file.close();
 		}
 		else

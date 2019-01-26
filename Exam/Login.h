@@ -20,6 +20,7 @@ private:
 	LinkButton* linkButtonRegist;
 	LinkButton* linkButtonFindPassword;
 	QCheckBox* checkBoxRemeberPassword;
+	QCheckBox* checkBoxAutoLogin;
 	QLineEdit* editId;
 	QLineEdit* editPassword;
 	QPushButton* buttonLogin;
