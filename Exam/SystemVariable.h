@@ -8,6 +8,7 @@ public:
 	const static char* const CHECKVERSIONSERVLET;
 	const static char* const REGISTSERVLET;
 	const static char* const LOGINSERVLET;
+	const static char* const GETEXERCISESET;
 public:
 	SystemVariable();
 	~SystemVariable();

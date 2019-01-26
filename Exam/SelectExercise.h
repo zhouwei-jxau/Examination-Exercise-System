@@ -8,6 +8,9 @@ public:
 	SelectExercise(QWidget *parent=Q_NULLPTR, Qt::WindowFlags flags = Qt::WindowFlags());
 	~SelectExercise();
 protected:
+private slots:
+	void slotRequestFinished(QNetworkReply* reply);
 private:
+	QListWidget* listwidgetExerciseSet;
 };
 
