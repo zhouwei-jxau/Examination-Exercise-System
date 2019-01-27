@@ -59,6 +59,12 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{81e6f54c-19f4-4a0b-b95b-aac5ed576d62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\OverWrite">
+      <UniqueIdentifier>{66064c5a-a27b-4ffa-bfc3-e80408e77c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OverWrite">
+      <UniqueIdentifier>{5b06e609-8f1b-4c21-94be-1b58f3743e31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,6 +94,15 @@
     <ClCompile Include="SelectExercise.cpp">
       <Filter>Source Files\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="CurrentUser.cpp">
+      <Filter>Source Files\SystemVariable</Filter>
+    </ClCompile>
+    <ClCompile Include="Splitter.cpp">
+      <Filter>Source Files\OverWrite</Filter>
+    </ClCompile>
+    <ClCompile Include="Answer.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -95,6 +110,15 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files\Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrentUser.h">
+      <Filter>Header Files\SystemVariable</Filter>
+    </ClInclude>
+    <ClInclude Include="Splitter.h">
+      <Filter>Header Files\OverWrite</Filter>
+    </ClInclude>
+    <ClInclude Include="Answer.h">
+      <Filter>Header Files\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

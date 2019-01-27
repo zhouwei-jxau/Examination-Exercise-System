@@ -5,7 +5,7 @@
 Login::Login()
 {
 	this->imageHeadpartrait = new QLabel();
-	this->imageHeadpartrait->setPixmap(QPixmap("Resources\\default\\icon\\headpartrait.jpg"));
+	this->imageHeadpartrait->setPixmap(QPixmap(SystemVariable::RESOURCEPATH+QString::fromLocal8Bit(SystemVariable::THEMEPATH)+SystemVariable::ICONPTH+QString::fromLocal8Bit("headpartrait.jpg")));
 	this->imageHeadpartrait->setFixedSize(QSize(90, 90));
 	this->checkBoxRemeberPassword = new QCheckBox();
 	this->checkBoxRemeberPassword->setFixedWidth(90);
@@ -115,6 +115,8 @@ void Login::requestFinished(QNetworkReply*reply)
 	int responseCode = json.value("responseCode").toInt();
 	if (responseCode == 0)
 	{
+		CurrentUser::setAccount(json.value("data").toObject().value("account").toString());
+		CurrentUser::setUserName(json.value("data").toObject().value("username").toString());
 		if (this->checkBoxRemeberPassword->isChecked())
 		{
 			//如果勾选了记住密码，那么保存当前用户

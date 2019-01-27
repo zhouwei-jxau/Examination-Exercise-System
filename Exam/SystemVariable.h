@@ -11,6 +11,10 @@ public:
 	const static char* const GETEXERCISESET;
 	const static char* const CONFIGPATH;
 	const static char* const USERFILENAME;
+	const static char* const RESOURCEPATH;
+	const static char* const THEMEPATH;
+	const static char* const ICONPTH;
+	const static char* const FONTFAMILY;
 public:
 	SystemVariable();
 	~SystemVariable();

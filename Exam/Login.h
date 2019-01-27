@@ -3,6 +3,7 @@
 #include "LinkButton.h"
 #include "Regist.h"
 #include "SelectExercise.h"
+#include "CurrentUser.h"
 class Login :
 	public QMainWindow
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <qmainwindow.h>
 #include "Login.h"
+#include "ExamClient.h"
 class SelectExercise :
 	public QMainWindow
 {
@@ -11,6 +12,7 @@ public:
 protected:
 private slots:
 	void slotRequestFinished(QNetworkReply* reply);
+	void slotSelectedExerciseSet();
 	void slotBackToLogin();
 private:
 	QListWidget* listwidgetExerciseSet;

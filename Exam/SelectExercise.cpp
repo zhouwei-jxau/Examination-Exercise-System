@@ -39,11 +39,19 @@ SelectExercise::SelectExercise(QWidget *parent, Qt::WindowFlags flags)
 	http->get(request);
 	connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotRequestFinished(QNetworkReply*)));
 	connect(this->buttonBack, SIGNAL(clicked()), this, SLOT(slotBackToLogin()));
+	connect(this->buttonSelect, SIGNAL(clicked()), this, SLOT(slotSelectedExerciseSet()));
 }
 
 
 SelectExercise::~SelectExercise()
 {
+}
+
+void SelectExercise::slotSelectedExerciseSet()
+{
+	ExamClient* client=new ExamClient();
+	client-> show();
+	this->close();
 }
 
 void SelectExercise::slotBackToLogin()
