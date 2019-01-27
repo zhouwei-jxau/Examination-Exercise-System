@@ -32,6 +32,7 @@ Login::Login()
 	this->labelTip->setPalette(palette);
 	this->setWindowTitle(QString::fromLocal8Bit("¿¼ÊÔÁ·Ï°¿Í»§¶Ë"));
 	this->setCentralWidget(new QWidget());
+
 	QGridLayout* layout = new QGridLayout();
 	layout->setSpacing(8);
 	layout->setContentsMargins(20, 40,10, 10);
@@ -50,6 +51,7 @@ Login::Login()
 	layout->addWidget(this->buttonLogin, 3, 1, 2, 1, Qt::AlignLeft|Qt::AlignTop);
 	layout->addWidget(this->labelTip, 4, 1, 1, 1, Qt::AlignLeft|Qt::AlignTop);
 	this->centralWidget()->setLayout(layout);
+
 	connect(this->linkButtonRegist, SIGNAL(clicked()), this, SLOT(slotRegist()));
 	connect(this->buttonLogin, SIGNAL(clicked()), this, SLOT(slotLogin()));
 
@@ -162,6 +164,7 @@ void Login::requestFinished(QNetworkReply*reply)
 	{
 		this->labelTip->setText(QString::fromLocal8Bit("µÇÂ¼Ê§°Ü:")+json.value("msg").toString());
 	}
+	reply->deleteLater();
 }
 
 void Login::slotRegist()

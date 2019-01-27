@@ -97,6 +97,7 @@ void Regist::requestFinished(QNetworkReply*reply)
 		QString msg = jsonObejct.value("msg").toString();
 		this->labelTip->setText(QString::fromLocal8Bit("×¢²áÊ§°Ü:") + msg);
 	}
+	reply->deleteLater();
 }
 
 void Regist::slotBackToLogin()
