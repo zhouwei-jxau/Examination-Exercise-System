@@ -5,6 +5,7 @@ class Answer :
 {
 public:
 	Answer();
+	virtual QVariant getAnswer()=0;
 	~Answer();
 };
 

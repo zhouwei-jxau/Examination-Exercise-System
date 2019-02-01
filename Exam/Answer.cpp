@@ -7,7 +7,6 @@ Answer::Answer()
 	this->setFrameShape(QFrame::Shape::Panel);
 }
 
-
 Answer::~Answer()
 {
 }

@@ -91,17 +91,29 @@
     <ClCompile Include="LinkButton.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="SelectExercise.cpp">
-      <Filter>Source Files\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="CurrentUser.cpp">
       <Filter>Source Files\SystemVariable</Filter>
     </ClCompile>
     <ClCompile Include="Splitter.cpp">
       <Filter>Source Files\OverWrite</Filter>
     </ClCompile>
-    <ClCompile Include="Answer.cpp">
+    <ClCompile Include="SelectExercise.cpp">
       <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Answer.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="AnswerChoice.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="AnswerJudge.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="AnswerFillInTheBlanks.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="AnswerSAQ.cpp">
+      <Filter>Source Files\Widget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,7 +130,19 @@
       <Filter>Header Files\OverWrite</Filter>
     </ClInclude>
     <ClInclude Include="Answer.h">
-      <Filter>Header Files\Interface</Filter>
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="AnswerChoice.h">
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="AnswerJudge.h">
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="AnswerFillInTheBlanks.h">
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="AnswerSAQ.h">
+      <Filter>Header Files\Widget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

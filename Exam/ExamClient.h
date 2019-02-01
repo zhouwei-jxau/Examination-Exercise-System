@@ -4,11 +4,17 @@
 #include <CurrentUser.h>
 #include <Splitter.h>
 #include <Answer.h>
+#include <AnswerChoice.h>
+#include <AnswerJudge.h>
+#include <AnswerFillInTheBlanks.h>
+#include <AnswerSAQ.h>
 class ExamClient : public QMainWindow
 {
 	Q_OBJECT
 public:
 	ExamClient(QWidget *parent = Q_NULLPTR);
+private slots:
+	void slotCommit();
 private:
 	QLabel* imageHeadpartrait;
 	QLabel* labelUserName;

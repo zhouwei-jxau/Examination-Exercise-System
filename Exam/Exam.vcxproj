@@ -122,6 +122,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Answer.cpp" />
+    <ClCompile Include="AnswerChoice.cpp" />
+    <ClCompile Include="AnswerFillInTheBlanks.cpp" />
+    <ClCompile Include="AnswerJudge.cpp" />
+    <ClCompile Include="AnswerSAQ.cpp" />
     <ClCompile Include="CheckVersion.cpp" />
     <ClCompile Include="CurrentUser.cpp" />
     <ClCompile Include="ExamClient.cpp" />
@@ -161,6 +165,10 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
     <ClInclude Include="Answer.h" />
+    <ClInclude Include="AnswerChoice.h" />
+    <ClInclude Include="AnswerFillInTheBlanks.h" />
+    <ClInclude Include="AnswerJudge.h" />
+    <ClInclude Include="AnswerSAQ.h" />
     <ClInclude Include="CurrentUser.h" />
     <ClInclude Include="Splitter.h" />
     <ClInclude Include="SystemVariable.h" />

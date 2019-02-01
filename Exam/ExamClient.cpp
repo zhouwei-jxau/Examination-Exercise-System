@@ -62,7 +62,7 @@ ExamClient::ExamClient(QWidget *parent)
 	splitterMain->setStretchFactor(1, 4);
 
 	this->texteditSubject = new QTextEdit();
-	this->answer = new Answer();
+	this->answer = new AnswerSAQ();
 	this->answer->setMinimumHeight(200);
 	splitterAnswer->addWidget(texteditSubject);
 	splitterAnswer->addWidget(answer);
@@ -82,4 +82,12 @@ ExamClient::ExamClient(QWidget *parent)
 	}
 	layout->addWidget(splitter);
 	this->centralWidget()->setLayout(layout);
+
+	connect(this->buttonCommit, SIGNAL(clicked()), this, SLOT(slotCommit()));
+}
+
+void ExamClient::slotCommit()
+{
+	QString answers = this->answer->getAnswer().value<QString>();
+	qDebug() << answers;
 }
