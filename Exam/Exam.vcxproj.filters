@@ -115,6 +115,9 @@
     <ClCompile Include="AnswerSAQ.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
+    <ClCompile Include="ExerciseList.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -163,6 +166,9 @@
     </QtMoc>
     <QtMoc Include="SelectExercise.h">
       <Filter>Header Files\Interface</Filter>
+    </QtMoc>
+    <QtMoc Include="ExerciseList.h">
+      <Filter>Header Files\Widget</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

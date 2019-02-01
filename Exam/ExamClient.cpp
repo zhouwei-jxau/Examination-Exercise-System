@@ -43,7 +43,7 @@ ExamClient::ExamClient(QWidget *parent)
 	subjectWidget->setLayout(new QVBoxLayout());
 	subjectWidget->layout()->setContentsMargins(0, 0, 0, 0);
 	subjectWidget->layout()->setSpacing(0);
-	this->listwidgetExercise = new QListWidget();
+	this->listwidgetExercise = new ExerciseList();
 	this->listwidgetExercise->setMinimumWidth(200);
 	this->buttonCommit = new QPushButton();
 	this->buttonCommit->setFixedHeight(40);
@@ -84,6 +84,11 @@ ExamClient::ExamClient(QWidget *parent)
 	this->centralWidget()->setLayout(layout);
 
 	connect(this->buttonCommit, SIGNAL(clicked()), this, SLOT(slotCommit()));
+
+	this->listwidgetExercise->addChoice(QString::fromLocal8Bit("第一题"));
+	this->listwidgetExercise->addJudge(QString::fromLocal8Bit("第一题"));
+	this->listwidgetExercise->addFillInTheBlanks(QString::fromLocal8Bit("第一题"));
+	this->listwidgetExercise->addSAQ(QString::fromLocal8Bit("第一题"));
 }
 
 void ExamClient::slotCommit()

@@ -129,6 +129,7 @@
     <ClCompile Include="CheckVersion.cpp" />
     <ClCompile Include="CurrentUser.cpp" />
     <ClCompile Include="ExamClient.cpp" />
+    <ClCompile Include="ExerciseList.cpp" />
     <ClCompile Include="LinkButton.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="main.cpp" />
@@ -170,6 +171,10 @@
     <ClInclude Include="AnswerJudge.h" />
     <ClInclude Include="AnswerSAQ.h" />
     <ClInclude Include="CurrentUser.h" />
+    <QtMoc Include="ExerciseList.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
     <ClInclude Include="Splitter.h" />
     <ClInclude Include="SystemVariable.h" />
     <QtMoc Include="ExamClient.h" />

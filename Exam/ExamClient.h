@@ -8,6 +8,7 @@
 #include <AnswerJudge.h>
 #include <AnswerFillInTheBlanks.h>
 #include <AnswerSAQ.h>
+#include <ExerciseList.h>
 class ExamClient : public QMainWindow
 {
 	Q_OBJECT
@@ -22,6 +23,6 @@ private:
 	QPushButton* buttonCommit;
 	QTextEdit* texteditSubject;
 
-	QListWidget* listwidgetExercise;
+	ExerciseList* listwidgetExercise;
 	Answer* answer;
 };
