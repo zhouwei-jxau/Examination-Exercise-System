@@ -3,6 +3,7 @@
 
 QString CurrentUser::account = QString("");
 QString CurrentUser::username = QString("");
+ExerciseSet CurrentUser::exerciseSet=ExerciseSet();
 CurrentUser::CurrentUser()
 {
 }
@@ -25,6 +26,16 @@ void CurrentUser::setAccount(QString account)
 QString CurrentUser::getAccount()
 {
 	return CurrentUser::account;
+}
+
+void CurrentUser::setExerciseSet(ExerciseSet exerciseSet)
+{
+	CurrentUser::exerciseSet = exerciseSet;
+}
+
+ExerciseSet& CurrentUser::getExerciseSet()
+{
+	return CurrentUser::exerciseSet;
 }
 
 

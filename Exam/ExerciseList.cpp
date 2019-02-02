@@ -76,24 +76,48 @@ ExerciseList::ExerciseList()
 }
 
 
+void ExerciseList::addExercise(Exercise * exercise)
+{
+	if (exercise->getType() == Exercise::ExerciseType::Choice)
+	{
+		this->addChoice(exercise->getSubject());
+	}
+	if (exercise->getType() == Exercise::ExerciseType::Judge)
+	{
+		this->addJudge(exercise->getSubject());
+	}
+	if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
+	{
+		this->addFillInTheBlanks(exercise->getSubject());
+	}
+	if (exercise->getType() == Exercise::ExerciseType::SAQ)
+	{
+		this->addSAQ(exercise->getSubject());
+	}
+}
+
 void ExerciseList::addChoice(QString subject)
 {
 	this->insertItem(this->row(this->itemJudgeFolder), "      "+QString::number(this->numOfChoice + 1) + "." + subject);
+	this->numOfChoice++;
 }
 
 void ExerciseList::addJudge(QString subject)
 {
-	this->insertItem(this->row(this->itemFillInTheBlanks), "      "+QString::number(this->numOfChoice + 1) + "." + subject);
+	this->insertItem(this->row(this->itemFillInTheBlanks), "      "+QString::number(this->numOfJudge + 1) + "." + subject);
+	this->numOfJudge++;
 }
 
 void ExerciseList::addFillInTheBlanks(QString subject)
 {
-	this->insertItem(this->row(this->itemSAQ), "      "+QString::number(this->numOfChoice + 1) + "." + subject);
+	this->insertItem(this->row(this->itemSAQ), "      "+QString::number(this->numOfFillInTheBlanks + 1) + "." + subject);
+	this->numOfFillInTheBlanks++;
 }
 
 void ExerciseList::addSAQ(QString subject)
 {
-	this->addItem("      "+QString::number(this->numOfChoice + 1) + "." + subject);
+	this->addItem("      "+QString::number(this->numOfSAQ + 1) + "." + subject);
+	this->numOfSAQ++;
 }
 
 ExerciseList::~ExerciseList()

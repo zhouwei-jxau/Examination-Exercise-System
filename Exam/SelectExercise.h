@@ -1,5 +1,6 @@
 #pragma once
 #include <qmainwindow.h>
+#include <GenerateExercise.h>
 #include "Login.h"
 #include "ExamClient.h"
 class SelectExercise :

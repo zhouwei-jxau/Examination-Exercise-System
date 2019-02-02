@@ -1,11 +1,13 @@
 #pragma once
 #include <qlistwidget.h>
+#include <Exercise.h>
 class ExerciseList :
 	public QListWidget
 {
 	Q_OBJECT
 public:
 	ExerciseList();
+	void addExercise(Exercise* exercise);
 	void addChoice(QString subject);
 	void addJudge(QString subject);
 	void addFillInTheBlanks(QString subject);

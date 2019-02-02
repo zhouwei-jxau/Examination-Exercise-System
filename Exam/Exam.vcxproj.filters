@@ -118,6 +118,27 @@
     <ClCompile Include="ExerciseList.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
+    <ClCompile Include="Exercise.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ChoiceExercise.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ExerciseSet.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateExercise.cpp">
+      <Filter>Source Files\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="JudgeExercise.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="FillInTheBlanksExercise.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="SAQExercise.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -147,6 +168,24 @@
     <ClInclude Include="AnswerSAQ.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
+    <ClInclude Include="Exercise.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ChoiceExercise.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ExerciseSet.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="JudgeExercise.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="FillInTheBlanksExercise.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SAQExercise.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ExamClient.h">
@@ -154,9 +193,6 @@
     </QtMoc>
     <QtMoc Include="CheckVersion.h">
       <Filter>Header Files\Function</Filter>
-    </QtMoc>
-    <QtMoc Include="LinkButton.h">
-      <Filter>Header Files\Widget</Filter>
     </QtMoc>
     <QtMoc Include="Regist.h">
       <Filter>Header Files\Interface</Filter>
@@ -169,6 +205,12 @@
     </QtMoc>
     <QtMoc Include="ExerciseList.h">
       <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="GenerateExercise.h">
+      <Filter>Header Files\Function</Filter>
+    </QtMoc>
+    <QtMoc Include="LinkButton.h">
+      <Filter>Resource Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

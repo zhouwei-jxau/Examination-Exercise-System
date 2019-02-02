@@ -158,7 +158,7 @@ void Login::requestFinished(QNetworkReply*reply)
 			}
 		}
 
-		SelectExercise* selectExercise = new SelectExercise();
+		SelectExercise* selectExercise = new SelectExercise(this);
 		selectExercise->show();
 		this->close();
 	}

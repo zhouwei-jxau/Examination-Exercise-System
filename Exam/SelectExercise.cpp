@@ -9,6 +9,7 @@ SelectExercise::SelectExercise(QWidget *parent, Qt::WindowFlags flags)
 	this->setFixedSize(QSize(400, 700));
 	this->listwidgetExerciseSet = new QListWidget();
 	this->listwidgetExerciseSet->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	this->listwidgetExerciseSet->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
 	this->buttonBack = new QPushButton();
 	this->buttonBack->setFixedHeight(40);
 	this->buttonBack->setText(QString::fromLocal8Bit("·µ»ØµÇÂ¼"));
@@ -49,8 +50,10 @@ SelectExercise::~SelectExercise()
 
 void SelectExercise::slotSelectedExerciseSet()
 {
-	ExamClient* client=new ExamClient();
-	client-> show();
+	QString exerciseName = this->listwidgetExerciseSet->selectedItems().at(0)->text();
+	CurrentUser::getExerciseSet().setName(exerciseName);
+	GenerateExercise* generateExercise = new GenerateExercise(this);
+	generateExercise->show();
 	this->close();
 }
 
@@ -94,7 +97,7 @@ void SelectExercise::slotRequestFinished(QNetworkReply * reply)
 	{
 		QListWidgetItem *item = new QListWidgetItem();
 		QFont font = item->font();
-		font.setFamily(QString::fromLocal8Bit("Î¢ÈíÑÅºÚ"));
+		font.setFamily(QString::fromLocal8Bit(SystemVariable::FONTFAMILY));
 		font.setPointSize(16);
 		item->setFont(font);
 		item->setSizeHint(QSize(this->listwidgetExerciseSet->width(), 42));

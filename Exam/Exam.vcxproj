@@ -127,13 +127,20 @@
     <ClCompile Include="AnswerJudge.cpp" />
     <ClCompile Include="AnswerSAQ.cpp" />
     <ClCompile Include="CheckVersion.cpp" />
+    <ClCompile Include="ChoiceExercise.cpp" />
     <ClCompile Include="CurrentUser.cpp" />
     <ClCompile Include="ExamClient.cpp" />
+    <ClCompile Include="Exercise.cpp" />
     <ClCompile Include="ExerciseList.cpp" />
+    <ClCompile Include="ExerciseSet.cpp" />
+    <ClCompile Include="FillInTheBlanksExercise.cpp" />
+    <ClCompile Include="GenerateExercise.cpp" />
+    <ClCompile Include="JudgeExercise.cpp" />
     <ClCompile Include="LinkButton.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Regist.cpp" />
+    <ClCompile Include="SAQExercise.cpp" />
     <ClCompile Include="SelectExercise.cpp" />
     <ClCompile Include="Splitter.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -170,11 +177,21 @@
     <ClInclude Include="AnswerFillInTheBlanks.h" />
     <ClInclude Include="AnswerJudge.h" />
     <ClInclude Include="AnswerSAQ.h" />
+    <ClInclude Include="ChoiceExercise.h" />
     <ClInclude Include="CurrentUser.h" />
     <QtMoc Include="ExerciseList.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
+    <ClInclude Include="Exercise.h" />
+    <ClInclude Include="ExerciseSet.h" />
+    <ClInclude Include="FillInTheBlanksExercise.h" />
+    <QtMoc Include="GenerateExercise.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <ClInclude Include="JudgeExercise.h" />
+    <ClInclude Include="SAQExercise.h" />
     <ClInclude Include="Splitter.h" />
     <ClInclude Include="SystemVariable.h" />
     <QtMoc Include="ExamClient.h" />

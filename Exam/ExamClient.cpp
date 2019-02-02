@@ -84,15 +84,14 @@ ExamClient::ExamClient(QWidget *parent)
 	this->centralWidget()->setLayout(layout);
 
 	connect(this->buttonCommit, SIGNAL(clicked()), this, SLOT(slotCommit()));
-
-	this->listwidgetExercise->addChoice(QString::fromLocal8Bit("第一题"));
-	this->listwidgetExercise->addJudge(QString::fromLocal8Bit("第一题"));
-	this->listwidgetExercise->addFillInTheBlanks(QString::fromLocal8Bit("第一题"));
-	this->listwidgetExercise->addSAQ(QString::fromLocal8Bit("第一题"));
+	//填充数据
+	for (int i = 0; i < CurrentUser::getExerciseSet().getExercise().size(); i++)
+	{
+		this->listwidgetExercise->addExercise(CurrentUser::getExerciseSet().getExercise().at(i));
+	}
 }
 
 void ExamClient::slotCommit()
 {
 	QString answers = this->answer->getAnswer().value<QString>();
-	qDebug() << answers;
 }
