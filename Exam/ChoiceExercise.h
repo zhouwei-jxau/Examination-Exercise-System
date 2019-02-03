@@ -7,6 +7,7 @@ public:
 	ChoiceExercise();
 	void addOption(QString option);
 	QString getOption(int index);
+	QList<QString> getOptions();
 	int getNumberOfOptions();
 	~ChoiceExercise();
 private:

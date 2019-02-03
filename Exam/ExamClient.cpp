@@ -62,10 +62,17 @@ ExamClient::ExamClient(QWidget *parent)
 	splitterMain->setStretchFactor(1, 4);
 
 	this->texteditSubject = new QTextEdit();
-	this->answer = new AnswerSAQ();
-	this->answer->setMinimumHeight(200);
+	font = this->texteditSubject->font();
+	font.setFamily(SystemVariable::FONTFAMILY);
+	font.setPointSize(14);
+	this->texteditSubject->setReadOnly(true);
+	this->texteditSubject->setFont(font);
+	this->widgetAnswer = new QWidget();
+	this->widgetAnswer->setLayout(new QVBoxLayout());
+	this->widgetAnswer->setMinimumHeight(210);
+	this->answer = NULL;
 	splitterAnswer->addWidget(texteditSubject);
-	splitterAnswer->addWidget(answer);
+	splitterAnswer->addWidget(this->widgetAnswer);
 	splitterAnswer->setStretchFactor(0, 5);
 	splitterAnswer->setStretchFactor(1, 1);
 
@@ -87,11 +94,77 @@ ExamClient::ExamClient(QWidget *parent)
 	//Ìî³äÊý¾Ý
 	for (int i = 0; i < CurrentUser::getExerciseSet().getExercise().size(); i++)
 	{
-		this->listwidgetExercise->addExercise(CurrentUser::getExerciseSet().getExercise().at(i));
+		if (i == 0)
+		{
+			this->texteditSubject->setText(CurrentUser::getExerciseSet().getExercise().at(0)->getSubject());
+			this->setAnswer(CurrentUser::getExerciseSet().getExercise().at(0));
+		}
+		this->listwidgetExercise->addExercise(CurrentUser::getExerciseSet().getExercise().at(i),i);
 	}
+	connect(this->listwidgetExercise, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotExerciseSelected(QListWidgetItem*)));
 }
 
 void ExamClient::slotCommit()
 {
 	QString answers = this->answer->getAnswer().value<QString>();
+}
+
+void ExamClient::setAnswer(Exercise* exercise)
+{
+	if (exercise->getType() == Exercise::ExerciseType::Choice)
+	{
+		ChoiceExercise* cExercise = static_cast<ChoiceExercise*>(exercise);
+		if (this->answer != NULL)
+		{
+			this->widgetAnswer->layout()->removeWidget(this->answer);
+			delete this->answer;
+		}
+		this->answer = new AnswerChoice();
+		static_cast<AnswerChoice*>(this->answer)->fill(cExercise->getOptions());
+		this->widgetAnswer->layout()->addWidget(this->answer);
+	}
+	if (exercise->getType() == Exercise::ExerciseType::Judge)
+	{
+		if (this->answer != NULL)
+		{
+			this->widgetAnswer->layout()->removeWidget(this->answer);
+			delete this->answer;
+		}
+		this->answer = new AnswerJudge();
+		this->widgetAnswer->layout()->addWidget(this->answer);
+	}
+
+	if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
+	{
+		FillInTheBlanksExercise* fExercise = static_cast<FillInTheBlanksExercise*>(exercise);
+		if (this->answer != NULL)
+		{
+			this->widgetAnswer->layout()->removeWidget(this->answer);
+			delete this->answer;
+		}
+		this->answer = new AnswerFillInTheBlanks();
+		static_cast<AnswerFillInTheBlanks*>(this->answer)->setNumberOfBlanks(fExercise->getNumOfBlanks());
+		this->widgetAnswer->layout()->addWidget(this->answer);
+	}
+
+	if (exercise->getType() == Exercise::ExerciseType::SAQ)
+	{
+		if (this->answer != NULL)
+		{
+			this->widgetAnswer->layout()->removeWidget(this->answer);
+			delete this->answer;
+		}
+		this->answer = new AnswerSAQ();
+		this->widgetAnswer->layout()->addWidget(this->answer);
+	}
+}
+
+void ExamClient::slotExerciseSelected(QListWidgetItem * item)
+{
+	ExerciseListItem* eItem = static_cast<ExerciseListItem*>(item);
+	if (this->listwidgetExercise->isUnSubjectItem(item))
+		return;
+	int  index = eItem->getIndexInExerciseSet();
+	this->texteditSubject->setText(CurrentUser::getExerciseSet().getExercise().at(index)->getSubject());
+	this->setAnswer(CurrentUser::getExerciseSet().getExercise().at(index));
 }

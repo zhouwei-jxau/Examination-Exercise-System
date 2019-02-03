@@ -1,17 +1,19 @@
 #pragma once
 #include <qlistwidget.h>
 #include <Exercise.h>
+#include <ExerciseListItem.h>
 class ExerciseList :
 	public QListWidget
 {
 	Q_OBJECT
 public:
 	ExerciseList();
-	void addExercise(Exercise* exercise);
-	void addChoice(QString subject);
-	void addJudge(QString subject);
-	void addFillInTheBlanks(QString subject);
-	void addSAQ(QString subject);
+	void addExercise(Exercise* exercise,int index=-1);
+	void addChoice(QString subject,int index=-1);
+	void addJudge(QString subject, int index = -1);
+	void addFillInTheBlanks(QString subject, int index = -1);
+	void addSAQ(QString subject, int index = -1);
+	bool isUnSubjectItem(QListWidgetItem* item);
 	~ExerciseList();
 private slots:
 	void slotItemClicked(QListWidgetItem* item);
@@ -37,5 +39,7 @@ private:
 
 	QString pathOfFold;
 	QString pathOfUnFold;
+
+	QList<QListWidgetItem*> unSubjectItems;
 };
 

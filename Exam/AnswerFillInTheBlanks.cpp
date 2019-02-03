@@ -19,7 +19,7 @@ void AnswerFillInTheBlanks::setNumberOfBlanks(int numOfBlanks)
 		w->layout()->addWidget(new QTextEdit());
 		w->setFixedHeight(120);
 		QListWidgetItem* item = new QListWidgetItem();
-		item->setSizeHint(QSize(this->width(), 120));
+		item->setSizeHint(QSize(this->width(), 240));
 		this->listWidget->addItem(item);
 		this->listWidget->setItemWidget(item, w);
 	}

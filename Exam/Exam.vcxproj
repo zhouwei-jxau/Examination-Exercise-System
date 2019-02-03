@@ -132,6 +132,7 @@
     <ClCompile Include="ExamClient.cpp" />
     <ClCompile Include="Exercise.cpp" />
     <ClCompile Include="ExerciseList.cpp" />
+    <ClCompile Include="ExerciseListItem.cpp" />
     <ClCompile Include="ExerciseSet.cpp" />
     <ClCompile Include="FillInTheBlanksExercise.cpp" />
     <ClCompile Include="GenerateExercise.cpp" />
@@ -184,6 +185,7 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
     <ClInclude Include="Exercise.h" />
+    <ClInclude Include="ExerciseListItem.h" />
     <ClInclude Include="ExerciseSet.h" />
     <ClInclude Include="FillInTheBlanksExercise.h" />
     <QtMoc Include="GenerateExercise.h">

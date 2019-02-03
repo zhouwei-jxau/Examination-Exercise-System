@@ -16,6 +16,11 @@ QString ChoiceExercise::getOption(int index)
 	return options.at(index);
 }
 
+QList<QString> ChoiceExercise::getOptions()
+{
+	return this->options;
+}
+
 int ChoiceExercise::getNumberOfOptions()
 {
 	return this->options.size();

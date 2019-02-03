@@ -139,6 +139,9 @@
     <ClCompile Include="SAQExercise.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="ExerciseListItem.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -185,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="SAQExercise.h">
       <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ExerciseListItem.h">
+      <Filter>Header Files\Widget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

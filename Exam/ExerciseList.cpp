@@ -52,21 +52,25 @@ ExerciseList::ExerciseList()
 	label->setText(QString::fromLocal8Bit("¼ò´ðÌâ"));
 	this->widgetSAQFolder->layout()->addWidget(label);
 	QListWidgetItem* item = new QListWidgetItem();
+	this->unSubjectItems.append(item);
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetChoiceFolder);
 	this->itemChoiceFolder = item;
 	item = new QListWidgetItem();
+	this->unSubjectItems.append(item);
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetJudgeFolder);
 	this->itemJudgeFolder = item;
 	item = new QListWidgetItem();
+	this->unSubjectItems.append(item);
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetFillInTheBlanksFolder);
 	this->itemFillInTheBlanks = item;
-	item = new QListWidgetItem();
+	item = new QListWidgetItem();	
+	this->unSubjectItems.append(item);
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetSAQFolder);
@@ -76,48 +80,72 @@ ExerciseList::ExerciseList()
 }
 
 
-void ExerciseList::addExercise(Exercise * exercise)
+void ExerciseList::addExercise(Exercise * exercise,int index)
 {
 	if (exercise->getType() == Exercise::ExerciseType::Choice)
 	{
-		this->addChoice(exercise->getSubject());
+		this->addChoice(exercise->getSubject(),index);
 	}
 	if (exercise->getType() == Exercise::ExerciseType::Judge)
 	{
-		this->addJudge(exercise->getSubject());
+		this->addJudge(exercise->getSubject(),index);
 	}
 	if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
 	{
-		this->addFillInTheBlanks(exercise->getSubject());
+		this->addFillInTheBlanks(exercise->getSubject(),index);
 	}
 	if (exercise->getType() == Exercise::ExerciseType::SAQ)
 	{
-		this->addSAQ(exercise->getSubject());
+		this->addSAQ(exercise->getSubject(),index);
 	}
 }
 
-void ExerciseList::addChoice(QString subject)
+void ExerciseList::addChoice(QString subject,int index)
 {
-	this->insertItem(this->row(this->itemJudgeFolder), "      "+QString::number(this->numOfChoice + 1) + "." + subject);
+	ExerciseListItem* item = new ExerciseListItem();
+	item->setIndexInExerciseSet(index);
+	item->setText("      " + QString::number(this->numOfChoice + 1) + "." + subject);
+	this->insertItem(this->row(this->itemJudgeFolder),item);
 	this->numOfChoice++;
 }
 
-void ExerciseList::addJudge(QString subject)
+void ExerciseList::addJudge(QString subject,int index)
 {
-	this->insertItem(this->row(this->itemFillInTheBlanks), "      "+QString::number(this->numOfJudge + 1) + "." + subject);
+	ExerciseListItem* item = new ExerciseListItem();
+	item->setIndexInExerciseSet(index);
+	item->setText("      " + QString::number(this->numOfJudge + 1) + "." + subject);
+	this->insertItem(this->row(this->itemFillInTheBlanks), item);
 	this->numOfJudge++;
 }
 
-void ExerciseList::addFillInTheBlanks(QString subject)
+void ExerciseList::addFillInTheBlanks(QString subject,int index)
 {
-	this->insertItem(this->row(this->itemSAQ), "      "+QString::number(this->numOfFillInTheBlanks + 1) + "." + subject);
+	ExerciseListItem* item = new ExerciseListItem();
+	item->setIndexInExerciseSet(index);
+	item->setText("      " + QString::number(this->numOfFillInTheBlanks + 1) + "." + subject);
+	this->insertItem(this->row(this->itemSAQ), item);
 	this->numOfFillInTheBlanks++;
 }
 
-void ExerciseList::addSAQ(QString subject)
+void ExerciseList::addSAQ(QString subject,int index)
 {
-	this->addItem("      "+QString::number(this->numOfSAQ + 1) + "." + subject);
+	ExerciseListItem* item = new ExerciseListItem();
+	item->setIndexInExerciseSet(index);
+	item->setText("      " + QString::number(this->numOfSAQ + 1) + "." + subject);
+	this->addItem(item);
 	this->numOfSAQ++;
+}
+
+bool ExerciseList::isUnSubjectItem(QListWidgetItem * item)
+{
+	for (int i = 0; i < this->unSubjectItems.size(); i++)
+	{
+		if (item == this->unSubjectItems.at(i))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 ExerciseList::~ExerciseList()
