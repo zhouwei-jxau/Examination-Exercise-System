@@ -13,16 +13,22 @@
 #include <JudgeExercise.h>
 #include <FillInTheBlanksExercise.h>
 #include <SAQExercise.h>
+#include <CheckAnswers.h>
+
 class ExamClient : public QMainWindow
 {
 	Q_OBJECT
 public:
 	ExamClient(QWidget *parent = Q_NULLPTR);
+signals:
+	void signalUserCommit();
 protected:
 	void setAnswer(Exercise* exercise);
+	QVariant getCurrentExerciseAnswer();
 private slots:
 	void slotCommit();
 	void slotExerciseSelected(QListWidgetItem* item);
+	void slotAnswerChanged();
 private:
 	QLabel* imageHeadpartrait;
 	QLabel* labelUserName;
@@ -33,4 +39,6 @@ private:
 
 	ExerciseList* listwidgetExercise;
 	Answer* answer;
+
+	int currentExerciseIndex;
 };

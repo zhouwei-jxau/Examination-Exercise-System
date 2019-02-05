@@ -4,6 +4,7 @@
 
 AnswerJudge::AnswerJudge()
 {
+	this->type = Exercise::ExerciseType::Judge;
 	this->group = new QButtonGroup();
 	this->radioButtonCorrect = new QRadioButton();
 	this->radioButtonCorrect->setText(QString::fromLocal8Bit("ÊÇ"));

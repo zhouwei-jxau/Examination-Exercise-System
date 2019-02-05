@@ -4,6 +4,7 @@
 
 AnswerFillInTheBlanks::AnswerFillInTheBlanks()
 {
+	this->type = Exercise::ExerciseType::FillInTheBlanks;
 	this->setLayout(new QVBoxLayout());
 	this->listWidget = new QListWidget();
 	this->layout()->addWidget(this->listWidget);

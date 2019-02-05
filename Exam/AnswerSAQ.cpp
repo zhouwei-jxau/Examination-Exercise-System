@@ -4,6 +4,7 @@
 
 AnswerSAQ::AnswerSAQ()
 {
+	this->type = Exercise::ExerciseType::SAQ;
 	this->setLayout(new QVBoxLayout());
 	this->layout()->addWidget(new QTextEdit());
 }

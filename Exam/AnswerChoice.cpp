@@ -4,10 +4,13 @@
 
 AnswerChoice::AnswerChoice()
 {
+	this->type = Exercise::ExerciseType::Choice;
 	this->group = new QButtonGroup();
 	this->listWidget = new QListWidget();
 	this->setLayout(new QHBoxLayout());
 	this->layout()->addWidget(this->listWidget);
+
+	connect(this->group, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(slotRadioButtonChecked(QAbstractButton*)));
 }
 
 void AnswerChoice::fill(QList<QString> list)
@@ -43,4 +46,9 @@ QVariant AnswerChoice::getAnswer()
 AnswerChoice::~AnswerChoice()
 {
 	this->group->deleteLater();
+}
+
+void AnswerChoice::slotRadioButtonChecked(QAbstractButton *button)
+{
+	emit this->signalUserAnswered();
 }

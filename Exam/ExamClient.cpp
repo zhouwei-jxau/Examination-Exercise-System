@@ -106,7 +106,41 @@ ExamClient::ExamClient(QWidget *parent)
 
 void ExamClient::slotCommit()
 {
-	QString answers = this->answer->getAnswer().value<QString>();
+	int unAnswered = 0;
+	for (int i = 0; i < CurrentUser::getExerciseSet().getExercise().size();i++)
+	{
+		if(CurrentUser::getExerciseSet().getAnswers().at(i)->isAnswered()==false)
+			unAnswered++;
+	}
+	if (unAnswered > 0)
+	{
+		QMessageBox messageBox;
+		if (messageBox.question(this, QString::fromLocal8Bit("提示"),
+			QString::fromLocal8Bit("您还有") + QString::number(unAnswered) + QString::fromLocal8Bit("未完成，确定要提交吗?")) == QMessageBox::Yes)
+		{
+			CheckAnswers* checkAnswer = new CheckAnswers();
+			connect(this, SIGNAL(signalUserCommit()), checkAnswer, SLOT(slotUserCommit()));
+			checkAnswer->show();
+			emit this->signalUserCommit();
+			this->close();
+			return;
+		}
+		else
+		{
+			return;
+		}
+	}
+	QMessageBox messageBox;
+	if (messageBox.question(this, QString::fromLocal8Bit("提示"),
+		QString::fromLocal8Bit("提交后不可再次作答，确定要提交吗?")) == QMessageBox::Yes)
+	{
+		CheckAnswers* checkAnswer = new CheckAnswers();
+		connect(this, SIGNAL(signalUserCommit()), checkAnswer, SLOT(slotUserCommit()));
+		checkAnswer->show();
+		emit this->signalUserCommit();
+		this->close();
+		return;
+	}
 }
 
 void ExamClient::setAnswer(Exercise* exercise)
@@ -157,6 +191,13 @@ void ExamClient::setAnswer(Exercise* exercise)
 		this->answer = new AnswerSAQ();
 		this->widgetAnswer->layout()->addWidget(this->answer);
 	}
+	connect(this->answer, SIGNAL(signalUserAnswered()), this, SLOT(slotAnswerChanged()));
+}
+
+QVariant ExamClient::getCurrentExerciseAnswer()
+{
+	QVariant answer=this->answer->getAnswer();
+	return answer;
 }
 
 void ExamClient::slotExerciseSelected(QListWidgetItem * item)
@@ -167,4 +208,13 @@ void ExamClient::slotExerciseSelected(QListWidgetItem * item)
 	int  index = eItem->getIndexInExerciseSet();
 	this->texteditSubject->setText(CurrentUser::getExerciseSet().getExercise().at(index)->getSubject());
 	this->setAnswer(CurrentUser::getExerciseSet().getExercise().at(index));
+	this->currentExerciseIndex = index;
+}
+
+void ExamClient::slotAnswerChanged()
+{
+	UserAnswer userAnswer;
+	userAnswer.setAnswer(this->answer->getAnswer());
+	userAnswer.setType(this->answer->getType());
+	CurrentUser::getExerciseSet().setAnswer(userAnswer,this->currentExerciseIndex);
 }

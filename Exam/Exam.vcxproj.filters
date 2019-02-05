@@ -142,6 +142,12 @@
     <ClCompile Include="ExerciseListItem.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
+    <ClCompile Include="UserAnswer.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckAnswers.cpp">
+      <Filter>Source Files\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -155,12 +161,6 @@
     </ClInclude>
     <ClInclude Include="Splitter.h">
       <Filter>Header Files\OverWrite</Filter>
-    </ClInclude>
-    <ClInclude Include="Answer.h">
-      <Filter>Header Files\Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="AnswerChoice.h">
-      <Filter>Header Files\Widget</Filter>
     </ClInclude>
     <ClInclude Include="AnswerJudge.h">
       <Filter>Header Files\Widget</Filter>
@@ -192,6 +192,9 @@
     <ClInclude Include="ExerciseListItem.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
+    <ClInclude Include="UserAnswer.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ExamClient.h">
@@ -217,6 +220,15 @@
     </QtMoc>
     <QtMoc Include="LinkButton.h">
       <Filter>Resource Files</Filter>
+    </QtMoc>
+    <QtMoc Include="AnswerChoice.h">
+      <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="Answer.h">
+      <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="CheckAnswers.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
