@@ -148,6 +148,9 @@
     <ClCompile Include="CheckAnswers.cpp">
       <Filter>Source Files\Function</Filter>
     </ClCompile>
+    <ClCompile Include="ExerciseResult.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="UserAnswer.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="ExerciseResult.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ExamClient.h">
@@ -228,7 +234,7 @@
       <Filter>Header Files\Widget</Filter>
     </QtMoc>
     <QtMoc Include="CheckAnswers.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Function</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

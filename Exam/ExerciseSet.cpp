@@ -16,6 +16,86 @@ QString ExerciseSet::getName()
 	return this->name;
 }
 
+void ExerciseSet::setMarkOfChoice(int mark)
+{
+	this->markOfChoice = mark;
+}
+
+int ExerciseSet::getMarkOfChoice()
+{
+	return this->markOfChoice;
+}
+
+void ExerciseSet::setMarkOfJudge(int mark)
+{
+	this->markOfJudge = mark;
+}
+
+int ExerciseSet::getMarkOfJudge()
+{
+	return this->markOfJudge;
+}
+
+void ExerciseSet::setMarkOfFillInTheBlanks(int mark)
+{
+	this->markOfFillInTheBlanks = mark;
+}
+
+int ExerciseSet::getMarkOfFillInTheBlanks()
+{
+	return this->markOfFillInTheBlanks;
+}
+
+void ExerciseSet::setMarkOfSAQ(int mark)
+{
+	this->markOfSAQ = mark;
+}
+
+int ExerciseSet::getMarkOfSAQ()
+{
+	return this->markOfSAQ;
+}
+
+void ExerciseSet::setNumberOfChoice(int number)
+{
+	this->numOfChoice = number;
+}
+
+int ExerciseSet::getNumberOfChoice()
+{
+	return this->numOfChoice;
+}
+
+void ExerciseSet::setNumberOfJudge(int number)
+{
+	this->numOfJudge = number;
+}
+
+int ExerciseSet::getNumberOfJudge()
+{
+	return this->numOfJudge;
+}
+
+void ExerciseSet::setNumberOfFillInTheBlanks(int number)
+{
+	this->numOfFillInTheBlanks = number;
+}
+
+int ExerciseSet::getNumberFillInTheBlanks()
+{
+	return this->numOfFillInTheBlanks;
+}
+
+void ExerciseSet::setNumberOfSAQ(int number)
+{
+	this->numOfSAQ = number;
+}
+
+int ExerciseSet::getNumberOfSAQ()
+{
+	return this->numOfSAQ;
+}
+
 void ExerciseSet::addExercise(Exercise * exercise)
 {
 	this->list.append(exercise);

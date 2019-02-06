@@ -40,6 +40,9 @@ void CheckAnswers::slotUserCommit()
 {
 	this->Check();
 	this->GenerateMark();
+	ExerciseResult* result = new ExerciseResult();
+	result->show();
+	this->close();
 }
 
 void CheckAnswers::Check()
@@ -54,6 +57,7 @@ void CheckAnswers::Check()
 			this->totalOfChoice++;
 			if (exercise->getAnswer() == answer->getAnswer().toString())
 			{
+				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfChoice()) / CurrentUser::getExerciseSet().getNumberOfChoice();
 				this->rightOfChoice++;
 			}
 		}
@@ -68,12 +72,14 @@ void CheckAnswers::Check()
 			}
 			if (isCorrect == answer->getAnswer().toBool())
 			{
+				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfJudge()) / CurrentUser::getExerciseSet().getNumberOfJudge();
 				this->rightOfJudge++;
 			}
 		}
 
 		if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
 		{
+			int numOfRightFillInTheBlanks = 0;
 			this->totalOfFillInTheBlanks++;
 			QList<QString> userAnswers = answer->getAnswer().value<QList<QString>>();
 			QList<QString> rightAnswers = exercise->getAnswer().split("\n");
@@ -82,8 +88,12 @@ void CheckAnswers::Check()
 				if (rightAnswers.contains(userAnswers.at(j)))
 				{
 					this->rightOfFillInTheBlanks++;
+					numOfRightFillInTheBlanks++;
 				}
 			}
+
+			mark=(static_cast<double>(numOfRightFillInTheBlanks)/static_cast<FillInTheBlanksExercise*>(exercise)->getNumOfBlanks())*
+				static_cast<double>(CurrentUser::getExerciseSet().getMarkOfFillInTheBlanks()) / CurrentUser::getExerciseSet().getNumberFillInTheBlanks();
 		}
 
 		if (exercise->getType() == Exercise::ExerciseType::SAQ)
@@ -94,6 +104,7 @@ void CheckAnswers::Check()
 			if (userAnswer == rightAnswer)
 			{
 				this->rightOfSAQ++;
+				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfSAQ()) / CurrentUser::getExerciseSet().getNumberOfSAQ();
 			}
 		}
 

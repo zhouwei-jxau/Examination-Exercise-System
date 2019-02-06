@@ -33,6 +33,8 @@ private:
 	QLabel* imageHeadpartrait;
 	QLabel* labelUserName;
 	QLabel* labelAccount;
+	QLabel* labelTitle;
+	QLabel* labelTip;
 	QPushButton* buttonCommit;
 	QTextEdit* texteditSubject;
 	QWidget* widgetAnswer;

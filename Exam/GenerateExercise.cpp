@@ -50,7 +50,17 @@ void GenerateExercise::requestFinished(QNetworkReply * replay)
 		QJsonObject json = QJsonDocument::fromJson(data).object();
 		if (json.value("responseCode").toInt() == 0)
 		{
-			QJsonArray array = json.value("data").toArray();
+			QJsonObject exerciseSet = json.value("data").toObject();
+			CurrentUser::getExerciseSet().setMarkOfChoice(exerciseSet.value("markofChoice").toInt());
+			CurrentUser::getExerciseSet().setMarkOfJudge(exerciseSet.value("markOfJudge").toInt());
+			CurrentUser::getExerciseSet().setMarkOfFillInTheBlanks(exerciseSet.value("markOfFillInTheBlanks").toInt());
+			CurrentUser::getExerciseSet().setMarkOfSAQ(exerciseSet.value("markOfSAQ").toInt());
+			CurrentUser::getExerciseSet().setNumberOfChoice(exerciseSet.value("numOfChoice").toInt());
+			CurrentUser::getExerciseSet().setNumberOfJudge(exerciseSet.value("numOfJudge").toInt());
+			CurrentUser::getExerciseSet().setNumberOfFillInTheBlanks(exerciseSet.value("numOfFillInTheBlanks").toInt());
+			CurrentUser::getExerciseSet().setNumberOfSAQ(exerciseSet.value("numOfSAQ").toInt());
+			CurrentUser::getExerciseSet().setName(exerciseSet.value("name").toString());
+			QJsonArray array = exerciseSet.value("exercises").toArray();
 			for (int i = 0; i < array.size(); i++)
 			{
 				QString type = array.at(i).toObject().value("type").toString();

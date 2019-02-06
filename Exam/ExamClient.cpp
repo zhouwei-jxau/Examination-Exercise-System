@@ -4,6 +4,7 @@
 ExamClient::ExamClient(QWidget *parent)
 	: QMainWindow(parent)
 {
+	this->currentExerciseIndex = 0;
 	this->setWindowTitle(QString::fromLocal8Bit("考试客户端"));
 	this->setWindowState(Qt::WindowState::WindowMaximized);
 	this->setCentralWidget(new QWidget());
@@ -22,6 +23,20 @@ ExamClient::ExamClient(QWidget *parent)
 	font.setPointSize(14);
 	this->labelAccount->setFont(font);
 	this->labelAccount->setText(CurrentUser::getAccount());
+	this->labelTitle = new QLabel();
+	font = this->labelTitle->font();
+	font.setFamily(SystemVariable::FONTFAMILY);
+	font.setPointSize(30);
+	font.setBold(true);
+	this->labelTitle->setFont(font);
+	this->labelTitle->setText(CurrentUser::getExerciseSet().getName());
+	this->labelTitle->setContentsMargins(160, 0, 0, 0);
+	this->labelTip = new QLabel();
+	font = this->labelTip->font();
+	font.setFamily(SystemVariable::FONTFAMILY);
+	font.setPointSize(14);
+	this->labelTip->setFont(font);
+	this->labelTip->setText(QString::fromLocal8Bit("当前第") + QString::number(this->currentExerciseIndex + 1) + QString::fromLocal8Bit("题"));
 	QVBoxLayout* layout = new QVBoxLayout();
 	layout->setAlignment(Qt::AlignTop);
 	QSplitter* splitter = new QSplitter();
@@ -31,11 +46,13 @@ ExamClient::ExamClient(QWidget *parent)
 	QWidget* widgetInfo = new QWidget();
 	widgetInfo->setFixedHeight(110);
 	QGridLayout* gridLayoutInfo = new QGridLayout();
+	gridLayoutInfo->setColumnStretch(4, 100);
 	widgetInfo->setLayout(gridLayoutInfo);
-	gridLayoutInfo->setColumnStretch(3, 100);
-	gridLayoutInfo->addWidget(this->imageHeadpartrait, 0, 0,4,1,Qt::AlignLeft|Qt::AlignTop);
-	gridLayoutInfo->addWidget(this->labelAccount, 1, 3, 1, 1, Qt::AlignLeft | Qt::AlignTop);
-	gridLayoutInfo->addWidget(this->labelUserName, 3, 3, 1, 1, Qt::AlignLeft | Qt::AlignTop);
+	gridLayoutInfo->addWidget(this->imageHeadpartrait, 0, 0,3,1,Qt::AlignLeft|Qt::AlignTop);
+	gridLayoutInfo->addWidget(this->labelAccount, 0, 3, 1, 1, Qt::AlignLeft | Qt::AlignTop);
+	gridLayoutInfo->addWidget(this->labelUserName, 1, 3, 1, 1, Qt::AlignLeft | Qt::AlignTop);
+	gridLayoutInfo->addWidget(this->labelTip, 2, 3, 1, 1, Qt::AlignLeft | Qt::AlignTop);
+	gridLayoutInfo->addWidget(this->labelTitle, 0, 4, 3, 1, Qt::AlignLeft | Qt::AlignVCenter);
 
 	QSplitter* splitterMain = new Splitter();
 	splitterMain->setOrientation(Qt::Horizontal);
@@ -209,6 +226,7 @@ void ExamClient::slotExerciseSelected(QListWidgetItem * item)
 	this->texteditSubject->setText(CurrentUser::getExerciseSet().getExercise().at(index)->getSubject());
 	this->setAnswer(CurrentUser::getExerciseSet().getExercise().at(index));
 	this->currentExerciseIndex = index;
+	this->labelTip->setText(QString::fromLocal8Bit("当前第") + QString::number(this->currentExerciseIndex + 1) + QString::fromLocal8Bit("题"));
 }
 
 void ExamClient::slotAnswerChanged()

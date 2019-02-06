@@ -1,6 +1,9 @@
 #pragma once
 #include <qmainwindow.h>
 #include <CurrentUser.h>
+#include <FillInTheBlanksExercise.h>
+#include <ExerciseResult.h>
+
 class CheckAnswers :
 	public QMainWindow
 {
