@@ -17,7 +17,9 @@ void AnswerFillInTheBlanks::setNumberOfBlanks(int numOfBlanks)
 	{
 		QWidget* w=new QWidget();
 		w->setLayout(new QVBoxLayout());
-		w->layout()->addWidget(new QTextEdit());
+		QTextEdit* textedit = new QTextEdit();
+		this->textedits.append(textedit);
+		w->layout()->addWidget(textedit);
 		w->setFixedHeight(120);
 		QListWidgetItem* item = new QListWidgetItem();
 		item->setSizeHint(QSize(this->width(), 240));
@@ -25,6 +27,23 @@ void AnswerFillInTheBlanks::setNumberOfBlanks(int numOfBlanks)
 		this->listWidget->setItemWidget(item, w);
 	}
 	this->numOfBlanks = numOfBlanks;
+}
+
+void AnswerFillInTheBlanks::setEditable(bool enable)
+{
+	for (int i = 0; i < this->textedits.size(); i++)
+	{
+		this->textedits.at(i)->setEnabled(enable);
+	}
+}
+
+void AnswerFillInTheBlanks::setAnswer(QString answer)
+{
+	QList<QString> answerList = answer.split("\n");
+	for (int i = 0; i < answerList.size() && i < textedits.size(); i++)
+	{
+		textedits.at(i)->setText(answerList.at(i));
+	}
 }
 
 QVariant AnswerFillInTheBlanks::getAnswer()

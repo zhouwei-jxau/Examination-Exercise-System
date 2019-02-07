@@ -6,6 +6,46 @@ ExerciseSet::ExerciseSet()
 {
 }
 
+ExerciseSet::ExerciseSet(const ExerciseSet & es)
+{
+	this->name = es.name;
+	this->markOfChoice = es.markOfChoice;
+	this->markOfJudge = es.markOfJudge;
+	this->markOfFillInTheBlanks = es.markOfFillInTheBlanks;
+	this->markOfSAQ = es.markOfSAQ;
+	this->numOfChoice = es.numOfChoice;
+	this->numOfJudge = es.numOfJudge;
+	this->numOfFillInTheBlanks = es.numOfFillInTheBlanks;
+	this->numOfSAQ = es.numOfSAQ;
+	for (int i = 0; i < es.list.size(); i++)
+	{
+		Exercise* exercise;
+		if (es.list.at(i)->getType() == Exercise::ExerciseType::Choice)
+		{
+			exercise = new ChoiceExercise(*static_cast<ChoiceExercise*>(es.list.at(i)));
+		}
+		if (es.list.at(i)->getType() == Exercise::ExerciseType::Judge)
+		{
+			exercise = new JudgeExercise(*static_cast<JudgeExercise*>(es.list.at(i)));
+		}
+		if (es.list.at(i)->getType() == Exercise::ExerciseType::FillInTheBlanks)
+		{
+			exercise = new FillInTheBlanksExercise(*static_cast<FillInTheBlanksExercise*>(es.list.at(i)));
+		}
+		if (es.list.at(i)->getType() == Exercise::ExerciseType::SAQ)
+		{
+			exercise = new SAQExercise(*static_cast<SAQExercise*>(es.list.at(i)));
+		}
+		this->list.append(exercise);
+	}
+
+	for (int i = 0; i < es.answerList.size(); i++)
+	{
+		UserAnswer* userAnswer = new UserAnswer(*es.answerList.at(i));
+		this->answerList.append(userAnswer);
+	}
+}
+
 void ExerciseSet::setName(QString name)
 {
 	this->name = name;
@@ -16,7 +56,7 @@ QString ExerciseSet::getName()
 	return this->name;
 }
 
-void ExerciseSet::setMarkOfChoice(int mark)
+void ExerciseSet::setMarkOfChoice(double mark)
 {
 	this->markOfChoice = mark;
 }
@@ -26,7 +66,7 @@ int ExerciseSet::getMarkOfChoice()
 	return this->markOfChoice;
 }
 
-void ExerciseSet::setMarkOfJudge(int mark)
+void ExerciseSet::setMarkOfJudge(double mark)
 {
 	this->markOfJudge = mark;
 }
@@ -36,7 +76,7 @@ int ExerciseSet::getMarkOfJudge()
 	return this->markOfJudge;
 }
 
-void ExerciseSet::setMarkOfFillInTheBlanks(int mark)
+void ExerciseSet::setMarkOfFillInTheBlanks(double mark)
 {
 	this->markOfFillInTheBlanks = mark;
 }
@@ -46,7 +86,7 @@ int ExerciseSet::getMarkOfFillInTheBlanks()
 	return this->markOfFillInTheBlanks;
 }
 
-void ExerciseSet::setMarkOfSAQ(int mark)
+void ExerciseSet::setMarkOfSAQ(double mark)
 {
 	this->markOfSAQ = mark;
 }
@@ -124,6 +164,6 @@ ExerciseSet::~ExerciseSet()
 	for (int i = 0; i < this->list.size(); i++)
 	{
 		delete this->list.at(i);
-		delete this->answerList.at(0);
+		delete this->answerList.at(i);
 	}
 }

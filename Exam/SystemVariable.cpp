@@ -13,10 +13,16 @@ const char* const SystemVariable::RESOURCEPATH = "Resources/";
 const char* const SystemVariable::THEMEPATH = "default/";
 const char* const SystemVariable::ICONPTH = "icon/";
 const char* const SystemVariable::FONTFAMILY = "Î¢ÈíÑÅºÚ";
+const char* const SystemVariable::IMAGEPATH = "image/";
 
 SystemVariable::SystemVariable()
 {
 
+}
+
+QString SystemVariable::getImagePath()
+{
+	return QString::fromLocal8Bit(SystemVariable::RESOURCEPATH)+QString::fromLocal8Bit(SystemVariable::THEMEPATH)+QString::fromLocal8Bit(SystemVariable::IMAGEPATH);
 }
 
 

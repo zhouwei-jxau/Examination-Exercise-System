@@ -15,9 +15,11 @@ public:
 	const static char* const RESOURCEPATH;
 	const static char* const THEMEPATH;
 	const static char* const ICONPTH;
+	const static char* const IMAGEPATH;
 	const static char* const FONTFAMILY;
 public:
 	SystemVariable();
+	static QString getImagePath();
 	~SystemVariable();
 };
 

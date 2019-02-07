@@ -7,6 +7,8 @@ class AnswerChoice :
 public:
 	AnswerChoice();
 	void fill(QList<QString> list);
+	void setEditable(bool enable);
+	void setAnswer(QString answer);
 	QVariant getAnswer();
 	~AnswerChoice();
 private slots:

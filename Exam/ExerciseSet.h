@@ -1,19 +1,24 @@
 #pragma once
 #include <Exercise.h>
 #include <UserAnswer.h>
+#include <ChoiceExercise.h>
+#include <JudgeExercise.h>
+#include <FillInTheBlanksExercise.h>
+#include <SAQExercise.h>
 class ExerciseSet
 {
 public:
 	ExerciseSet();
+	ExerciseSet(const ExerciseSet& es);
 	void setName(QString name);
 	QString getName();
-	void setMarkOfChoice(int mark);
+	void setMarkOfChoice(double mark);
 	int getMarkOfChoice();
-	void setMarkOfJudge(int mark);
+	void setMarkOfJudge(double mark);
 	int getMarkOfJudge();
-	void setMarkOfFillInTheBlanks(int mark);
+	void setMarkOfFillInTheBlanks(double mark);
 	int getMarkOfFillInTheBlanks();
-	void setMarkOfSAQ(int mark);
+	void setMarkOfSAQ(double mark);
 	int getMarkOfSAQ();
 	void setNumberOfChoice(int number);
 	int getNumberOfChoice();
@@ -30,10 +35,10 @@ public:
 	~ExerciseSet();
 private:
 	QString name;
-	int markOfChoice;
-	int markOfJudge;
-	int markOfFillInTheBlanks;
-	int markOfSAQ;
+	double markOfChoice;
+	double markOfJudge;
+	double markOfFillInTheBlanks;
+	double markOfSAQ;
 	int numOfChoice;
 	int numOfJudge;
 	int numOfFillInTheBlanks;

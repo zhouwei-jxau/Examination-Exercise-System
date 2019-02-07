@@ -12,6 +12,10 @@ CheckAnswers::CheckAnswers(QWidget *parent, Qt::WindowFlags flags)
 	this->totalOfJudge = 0;
 	this->totalOfFillInTheBlanks = 0;
 	this->totalOfSAQ = 0;
+	this->markOfChoice = 0;
+	this->markOfJudge = 0;
+	this->markOfFillInTheBlanks = 0;
+	this->markOfSAQ = 0;
 
 
 	QMainWindow(parent, flags);
@@ -40,6 +44,16 @@ void CheckAnswers::slotUserCommit()
 {
 	this->Check();
 	this->GenerateMark();
+	CurrentUser::setRightOfChoice(this->rightOfChoice);
+	CurrentUser::setRightOfJudge(this->rightOfJudge);
+	CurrentUser::setRightOfFillInTheBlanks(this->rightOfFillInTheBlanks);
+	CurrentUser::setRightOfSAQ(this->rightOfSAQ);
+	CurrentUser::setSingleMarkList(this->markOfSingleExercise);
+	CurrentUser::setMark(this->totalMark);
+	CurrentUser::setMarkOfChoice(this->markOfChoice);
+	CurrentUser::setMarkOfJudge(this->markOfJudge);
+	CurrentUser::setMarkOfFillInTheBlanks(this->markOfFillInTheBlanks);
+	CurrentUser::setMarkOfSAQ(this->markOfSAQ);
 	ExerciseResult* result = new ExerciseResult();
 	result->show();
 	this->close();
@@ -59,6 +73,7 @@ void CheckAnswers::Check()
 			{
 				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfChoice()) / CurrentUser::getExerciseSet().getNumberOfChoice();
 				this->rightOfChoice++;
+				this->markOfChoice += mark;
 			}
 		}
 
@@ -74,6 +89,7 @@ void CheckAnswers::Check()
 			{
 				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfJudge()) / CurrentUser::getExerciseSet().getNumberOfJudge();
 				this->rightOfJudge++;
+				this->markOfJudge += mark;
 			}
 		}
 
@@ -94,6 +110,7 @@ void CheckAnswers::Check()
 
 			mark=(static_cast<double>(numOfRightFillInTheBlanks)/static_cast<FillInTheBlanksExercise*>(exercise)->getNumOfBlanks())*
 				static_cast<double>(CurrentUser::getExerciseSet().getMarkOfFillInTheBlanks()) / CurrentUser::getExerciseSet().getNumberFillInTheBlanks();
+			this->markOfFillInTheBlanks += mark;
 		}
 
 		if (exercise->getType() == Exercise::ExerciseType::SAQ)
@@ -105,6 +122,7 @@ void CheckAnswers::Check()
 			{
 				this->rightOfSAQ++;
 				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfSAQ()) / CurrentUser::getExerciseSet().getNumberOfSAQ();
+				this->markOfSAQ += mark;
 			}
 		}
 

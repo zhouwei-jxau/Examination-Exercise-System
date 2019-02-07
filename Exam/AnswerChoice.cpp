@@ -34,6 +34,21 @@ void AnswerChoice::fill(QList<QString> list)
 	}
 }
 
+void AnswerChoice::setEditable(bool enable)
+{
+	QList<QRadioButton*> radioButtons = options.keys();
+	for (int i = 0; i < radioButtons.size(); i++)
+	{
+		radioButtons.at(i)->setEnabled(enable);
+	}
+}
+
+void AnswerChoice::setAnswer(QString answer)
+{
+	QList<QRadioButton*> radioButtons = options.keys();
+	radioButtons.at(answer.at(0).unicode() - 'A')->setChecked(true);
+}
+
 QVariant AnswerChoice::getAnswer()
 {
 	QRadioButton* button=(QRadioButton*)this->group->checkedButton();

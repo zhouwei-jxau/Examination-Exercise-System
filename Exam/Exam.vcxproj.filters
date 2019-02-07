@@ -198,9 +198,6 @@
     <ClInclude Include="UserAnswer.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="ExerciseResult.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ExamClient.h">
@@ -235,6 +232,9 @@
     </QtMoc>
     <QtMoc Include="CheckAnswers.h">
       <Filter>Header Files\Function</Filter>
+    </QtMoc>
+    <QtMoc Include="ExerciseResult.h">
+      <Filter>Header Files\Interface</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

@@ -26,6 +26,24 @@ QVariant AnswerJudge::getAnswer()
 	return QVariant(isCorrect);
 }
 
+void AnswerJudge::setEditable(bool enable)
+{
+	radioButtonCorrect->setEnabled(enable);
+	radioButtonError->setEnabled(enable);
+}
+
+void AnswerJudge::setAnswer(QString answer)
+{
+	if (answer == "true")
+	{
+		this->radioButtonCorrect->setChecked(true);
+	}
+	else
+	{
+		this->radioButtonError->setChecked(true);
+	}
+}
+
 
 AnswerJudge::~AnswerJudge()
 {

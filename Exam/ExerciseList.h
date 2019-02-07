@@ -2,6 +2,7 @@
 #include <qlistwidget.h>
 #include <Exercise.h>
 #include <ExerciseListItem.h>
+#include <ExerciseSet.h>
 class ExerciseList :
 	public QListWidget
 {
@@ -13,6 +14,7 @@ public:
 	void addJudge(QString subject, int index = -1);
 	void addFillInTheBlanks(QString subject, int index = -1);
 	void addSAQ(QString subject, int index = -1);
+	void addExerciseSet(ExerciseSet exerciseSet);
 	bool isUnSubjectItem(QListWidgetItem* item);
 	~ExerciseList();
 private slots:

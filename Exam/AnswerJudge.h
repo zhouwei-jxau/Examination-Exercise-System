@@ -6,6 +6,8 @@ class AnswerJudge :
 public:
 	AnswerJudge();
 	QVariant getAnswer();
+	void setEditable(bool enable);
+	void setAnswer(QString answer);
 	~AnswerJudge();
 private:
 	QButtonGroup* group;

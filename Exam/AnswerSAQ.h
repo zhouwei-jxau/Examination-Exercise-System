@@ -6,6 +6,10 @@ class AnswerSAQ :
 public:
 	AnswerSAQ();
 	QVariant getAnswer();
+	void setEditable(bool enable);
+	void setAnswer(QString answer);
 	~AnswerSAQ();
+private:
+	QTextEdit* textedit;
 };
 

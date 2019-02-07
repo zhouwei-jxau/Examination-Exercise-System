@@ -136,6 +136,14 @@ void ExerciseList::addSAQ(QString subject,int index)
 	this->numOfSAQ++;
 }
 
+void ExerciseList::addExerciseSet(ExerciseSet exerciseSet)
+{
+	for (int i = 0; i < exerciseSet.getExercise().size(); i++)
+	{
+		this->addExercise(exerciseSet.getExercise().at(i),i);
+	}
+}
+
 bool ExerciseList::isUnSubjectItem(QListWidgetItem * item)
 {
 	for (int i = 0; i < this->unSubjectItems.size(); i++)

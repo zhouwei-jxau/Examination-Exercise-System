@@ -25,6 +25,10 @@ private:
 	int totalOfJudge;
 	int totalOfFillInTheBlanks;
 	int totalOfSAQ;
+	double markOfChoice;
+	double markOfJudge;
+	double markOfFillInTheBlanks;
+	double markOfSAQ;
 
 	QList<double> markOfSingleExercise;
 	double totalMark;
