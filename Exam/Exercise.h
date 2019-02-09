@@ -16,10 +16,13 @@ public:
 	QString getAnswer();
 	void setType(ExerciseType type);
 	ExerciseType getType();
+	void setExerciseNo(int no);
+	int getExerciseNo();
 	~Exercise();
 private:
 	QString subject;
 	QString answer;
 	ExerciseType type;
+	int no;
 };
 

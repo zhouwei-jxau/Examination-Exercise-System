@@ -4,6 +4,7 @@
 
 ExerciseSet::ExerciseSet()
 {
+
 }
 
 ExerciseSet::ExerciseSet(const ExerciseSet & es)
@@ -146,6 +147,21 @@ void ExerciseSet::setAnswer(UserAnswer answer,int index)
 {
 	this->answerList.at(index)->setAnswer(answer.getAnswer());
 	this->answerList.at(index)->setType(answer.getType());
+}
+
+int ExerciseSet::indexOf(Exercise* exercise)
+{
+	for (int i = 0; i < this->list.size(); i++)
+	{
+		if (exercise->getType() == list.at(i)->getType())
+		{
+			if (exercise->getExerciseNo() == list.at(i)->getExerciseNo())
+			{
+				return i;
+			}
+		}
+	}
+	return -1;
 }
 
 QList<Exercise*> ExerciseSet::getExercise()

@@ -36,6 +36,16 @@ Exercise::ExerciseType Exercise::getType()
 	return this->type;
 }
 
+void Exercise::setExerciseNo(int no)
+{
+	this->no = no;
+}
+
+
+int Exercise::getExerciseNo()
+{
+	return this->no;
+}
 
 Exercise::~Exercise()
 {

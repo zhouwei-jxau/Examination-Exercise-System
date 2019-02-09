@@ -9,6 +9,7 @@ public:
 	void fill(QList<QString> list);
 	void setEditable(bool enable);
 	void setAnswer(QString answer);
+	void setAnswer(QVariant answer);
 	QVariant getAnswer();
 	~AnswerChoice();
 private slots:

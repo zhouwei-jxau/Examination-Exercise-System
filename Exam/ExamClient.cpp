@@ -86,6 +86,7 @@ ExamClient::ExamClient(QWidget *parent)
 	this->texteditSubject->setFont(font);
 	this->widgetAnswer = new QWidget();
 	this->widgetAnswer->setLayout(new QVBoxLayout());
+	this->widgetAnswer->layout()->setContentsMargins(0, 0, 0, 0);
 	this->widgetAnswer->setMinimumHeight(210);
 	this->answer = NULL;
 	splitterAnswer->addWidget(texteditSubject);
@@ -133,7 +134,7 @@ void ExamClient::slotCommit()
 	{
 		QMessageBox messageBox;
 		if (messageBox.question(this, QString::fromLocal8Bit("提示"),
-			QString::fromLocal8Bit("您还有") + QString::number(unAnswered) + QString::fromLocal8Bit("未完成，确定要提交吗?")) == QMessageBox::Yes)
+			QString::fromLocal8Bit("您还有") + QString::number(unAnswered) + QString::fromLocal8Bit("题未完成，确定要提交吗?")) == QMessageBox::Yes)
 		{
 			CheckAnswers* checkAnswer = new CheckAnswers();
 			connect(this, SIGNAL(signalUserCommit()), checkAnswer, SLOT(slotUserCommit()));
@@ -184,7 +185,6 @@ void ExamClient::setAnswer(Exercise* exercise)
 		this->answer = new AnswerJudge();
 		this->widgetAnswer->layout()->addWidget(this->answer);
 	}
-
 	if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
 	{
 		FillInTheBlanksExercise* fExercise = static_cast<FillInTheBlanksExercise*>(exercise);
@@ -197,7 +197,6 @@ void ExamClient::setAnswer(Exercise* exercise)
 		static_cast<AnswerFillInTheBlanks*>(this->answer)->setNumberOfBlanks(fExercise->getNumOfBlanks());
 		this->widgetAnswer->layout()->addWidget(this->answer);
 	}
-
 	if (exercise->getType() == Exercise::ExerciseType::SAQ)
 	{
 		if (this->answer != NULL)
@@ -223,9 +222,13 @@ void ExamClient::slotExerciseSelected(QListWidgetItem * item)
 	if (this->listwidgetExercise->isUnSubjectItem(item))
 		return;
 	int  index = eItem->getIndexInExerciseSet();
+	this->currentExerciseIndex = index;
 	this->texteditSubject->setText(CurrentUser::getExerciseSet().getExercise().at(index)->getSubject());
 	this->setAnswer(CurrentUser::getExerciseSet().getExercise().at(index));
-	this->currentExerciseIndex = index;
+	if (CurrentUser::getExerciseSet().getAnswers().at(index)->isAnswered())
+	{
+		this->answer->setAnswer(CurrentUser::getExerciseSet().getAnswers().at(index)->getAnswer());
+	}
 	this->labelTip->setText(QString::fromLocal8Bit("当前第") + QString::number(this->currentExerciseIndex + 1) + QString::fromLocal8Bit("题"));
 }
 
@@ -234,5 +237,6 @@ void ExamClient::slotAnswerChanged()
 	UserAnswer userAnswer;
 	userAnswer.setAnswer(this->answer->getAnswer());
 	userAnswer.setType(this->answer->getType());
-	CurrentUser::getExerciseSet().setAnswer(userAnswer,this->currentExerciseIndex);
+	if(this->answer->isAnswered())
+		CurrentUser::getExerciseSet().setAnswer(userAnswer,this->currentExerciseIndex);
 }

@@ -67,6 +67,7 @@ void GenerateExercise::requestFinished(QNetworkReply * replay)
 				if (type == "Choice")
 				{
 					ChoiceExercise* choice = new ChoiceExercise();
+					choice->setExerciseNo(array.at(i).toObject().value("no").toInt());
 					choice->setAnswer(array.at(i).toObject().value("answer").toString());
 					choice->setType(Exercise::ExerciseType::Choice);
 					choice->setSubject(array.at(i).toObject().value("subject").toString());
@@ -83,6 +84,7 @@ void GenerateExercise::requestFinished(QNetworkReply * replay)
 				if (type == "Judge")
 				{
 					JudgeExercise* judge = new JudgeExercise();
+					judge->setExerciseNo(array.at(i).toObject().value("no").toInt());
 					judge->setAnswer(array.at(i).toObject().value("answer").toString());
 					judge->setType(Exercise::ExerciseType::Judge);
 					judge->setSubject(array.at(i).toObject().value("subject").toString());
@@ -92,6 +94,7 @@ void GenerateExercise::requestFinished(QNetworkReply * replay)
 				if (type == "FillInTheBlanks")
 				{
 					FillInTheBlanksExercise* fillInTheBlanks = new FillInTheBlanksExercise();
+					fillInTheBlanks->setExerciseNo(array.at(i).toObject().value("no").toInt());
 					fillInTheBlanks->setAnswer(array.at(i).toObject().value("answer").toString());
 					fillInTheBlanks->setNumberOfBlanks(array.at(i).toObject().value("numOfBlanks").toInt());
 					fillInTheBlanks->setSubject(array.at(i).toObject().value("subject").toString());
@@ -102,6 +105,7 @@ void GenerateExercise::requestFinished(QNetworkReply * replay)
 				if (type == "SAQ")
 				{
 					SAQExercise* saq = new SAQExercise();
+					saq->setExerciseNo(array.at(i).toObject().value("no").toInt());
 					saq->setAnswer(array.at(i).toObject().value("answer").toString());
 					saq->setSubject(array.at(i).toObject().value("subject").toString());
 					saq->setType(Exercise::ExerciseType::SAQ);

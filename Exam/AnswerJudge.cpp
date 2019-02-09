@@ -7,8 +7,10 @@ AnswerJudge::AnswerJudge()
 	this->type = Exercise::ExerciseType::Judge;
 	this->group = new QButtonGroup();
 	this->radioButtonCorrect = new QRadioButton();
+	connect(this->radioButtonCorrect, SIGNAL(clicked()), this, SLOT(slotRadioButtonChecked()));
 	this->radioButtonCorrect->setText(QString::fromLocal8Bit("ÊÇ"));
 	this->radioButtonError = new QRadioButton();
+	connect(this->radioButtonError, SIGNAL(clicked()), this, SLOT(slotRadioButtonChecked()));
 	this->radioButtonError->setText(QString::fromLocal8Bit("·ñ"));
 	this->setLayout(new QHBoxLayout());
 	this->layout()->addWidget(this->radioButtonCorrect);
@@ -34,6 +36,8 @@ void AnswerJudge::setEditable(bool enable)
 
 void AnswerJudge::setAnswer(QString answer)
 {
+	if (answer == "")
+		return;
 	if (answer == "true")
 	{
 		this->radioButtonCorrect->setChecked(true);
@@ -44,7 +48,21 @@ void AnswerJudge::setAnswer(QString answer)
 	}
 }
 
+void AnswerJudge::setAnswer(QVariant answer)
+{
+	QString tAnswer = answer.value<QString>();
+	if (tAnswer == "")
+		return;
+	this->setAnswer(tAnswer);
+}
+
 
 AnswerJudge::~AnswerJudge()
 {
+}
+
+void AnswerJudge::slotRadioButtonChecked()
+{
+	this->answered = true;
+	emit this->signalUserAnswered();
 }

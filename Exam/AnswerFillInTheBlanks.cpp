@@ -18,6 +18,7 @@ void AnswerFillInTheBlanks::setNumberOfBlanks(int numOfBlanks)
 		QWidget* w=new QWidget();
 		w->setLayout(new QVBoxLayout());
 		QTextEdit* textedit = new QTextEdit();
+		connect(textedit, SIGNAL(textChanged()), this, SLOT(slotTextChanged()));
 		this->textedits.append(textedit);
 		w->layout()->addWidget(textedit);
 		w->setFixedHeight(120);
@@ -46,6 +47,15 @@ void AnswerFillInTheBlanks::setAnswer(QString answer)
 	}
 }
 
+void AnswerFillInTheBlanks::setAnswer(QVariant answer)
+{
+	QList<QString> answerList = answer.value<QList<QString>>();
+	for (int i = 0; i < answerList.size(); i++)
+	{
+		textedits.at(i)->setText(answerList.at(i));
+	}
+}
+
 QVariant AnswerFillInTheBlanks::getAnswer()
 {
 	QList<QString> list;
@@ -65,4 +75,10 @@ int AnswerFillInTheBlanks::getNumberOfBlanks()
 
 AnswerFillInTheBlanks::~AnswerFillInTheBlanks()
 {
+}
+
+void AnswerFillInTheBlanks::slotTextChanged()
+{
+	this->answered = true;
+	emit this -> signalUserAnswered();
 }

@@ -45,8 +45,18 @@ void AnswerChoice::setEditable(bool enable)
 
 void AnswerChoice::setAnswer(QString answer)
 {
+	if (answer == "")
+		return;
 	QList<QRadioButton*> radioButtons = options.keys();
 	radioButtons.at(answer.at(0).unicode() - 'A')->setChecked(true);
+}
+
+void AnswerChoice::setAnswer(QVariant answer)
+{
+	QString tAnswer = answer.value<QString>();
+	if (tAnswer == "")
+		return;
+	this->setAnswer(tAnswer);
 }
 
 QVariant AnswerChoice::getAnswer()
@@ -65,5 +75,6 @@ AnswerChoice::~AnswerChoice()
 
 void AnswerChoice::slotRadioButtonChecked(QAbstractButton *button)
 {
+	this->answered = true;
 	emit this->signalUserAnswered();
 }

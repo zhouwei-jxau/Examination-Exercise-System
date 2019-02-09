@@ -165,15 +165,6 @@
     <ClInclude Include="Splitter.h">
       <Filter>Header Files\OverWrite</Filter>
     </ClInclude>
-    <ClInclude Include="AnswerJudge.h">
-      <Filter>Header Files\Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="AnswerFillInTheBlanks.h">
-      <Filter>Header Files\Widget</Filter>
-    </ClInclude>
-    <ClInclude Include="AnswerSAQ.h">
-      <Filter>Header Files\Widget</Filter>
-    </ClInclude>
     <ClInclude Include="Exercise.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
@@ -235,6 +226,15 @@
     </QtMoc>
     <QtMoc Include="ExerciseResult.h">
       <Filter>Header Files\Interface</Filter>
+    </QtMoc>
+    <QtMoc Include="AnswerFillInTheBlanks.h">
+      <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="AnswerJudge.h">
+      <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="AnswerSAQ.h">
+      <Filter>Header Files\Widget</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

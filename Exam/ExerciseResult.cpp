@@ -156,6 +156,9 @@ void ExerciseResult::setAnswer(Exercise * exercise)
 		static_cast<AnswerChoice*>(this->studentAnswer)->fill(cExercise->getOptions());
 		this->widgetStudentAnswer->layout()->addWidget(this->studentAnswer);
 		this->systemAnswer->setAnswer(exercise->getAnswer());
+		int index = CurrentUser::getExerciseSet().indexOf(exercise);
+		this->studentAnswer->setAnswer(CurrentUser::getExerciseSet().getAnswers().at(index)->getAnswer());
+
 	}
 	if (exercise->getType() == Exercise::ExerciseType::Judge)
 	{
@@ -174,6 +177,9 @@ void ExerciseResult::setAnswer(Exercise * exercise)
 		this->widgetSystemAnswer->layout()->addWidget(this->systemAnswer);
 		this->studentAnswer = new AnswerJudge();
 		this->widgetStudentAnswer->layout()->addWidget(this->studentAnswer);
+		this->systemAnswer->setAnswer(exercise->getAnswer());
+		int index = CurrentUser::getExerciseSet().indexOf(exercise);
+		this->studentAnswer->setAnswer(CurrentUser::getExerciseSet().getAnswers().at(index)->getAnswer());
 	}
 
 	if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
@@ -196,6 +202,8 @@ void ExerciseResult::setAnswer(Exercise * exercise)
 		static_cast<AnswerFillInTheBlanks*>(this->studentAnswer)->setNumberOfBlanks(fExercise->getNumOfBlanks());
 		this->widgetStudentAnswer->layout()->addWidget(this->studentAnswer);
 		this->systemAnswer->setAnswer(exercise->getAnswer());
+		int index = CurrentUser::getExerciseSet().indexOf(exercise);
+		this->studentAnswer->setAnswer(CurrentUser::getExerciseSet().getAnswers().at(index)->getAnswer());
 	}
 
 	if (exercise->getType() == Exercise::ExerciseType::SAQ)
@@ -215,6 +223,8 @@ void ExerciseResult::setAnswer(Exercise * exercise)
 		this->studentAnswer = new AnswerSAQ();
 		this->widgetStudentAnswer->layout()->addWidget(this->studentAnswer);
 		this->systemAnswer->setAnswer(exercise->getAnswer());
+		int index = CurrentUser::getExerciseSet().indexOf(exercise);
+		this->studentAnswer->setAnswer(CurrentUser::getExerciseSet().getAnswers().at(index)->getAnswer());
 	}
 }
 

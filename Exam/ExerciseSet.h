@@ -30,6 +30,7 @@ public:
 	int getNumberOfSAQ();
 	void addExercise(Exercise* exercise);
 	void setAnswer(UserAnswer answer,int index);
+	int indexOf(Exercise* exercise);
 	QList<Exercise*> getExercise();
 	QList<UserAnswer*> getAnswers();
 	~ExerciseSet();
