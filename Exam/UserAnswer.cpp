@@ -5,6 +5,9 @@
 UserAnswer::UserAnswer()
 {
 	this->answered = false;
+	this->flag = false;
+	this->right = false;
+	this->half = false;
 }
 
 QVariant UserAnswer::getAnswer()
@@ -31,6 +34,26 @@ void UserAnswer::setType(Exercise::ExerciseType type)
 bool UserAnswer::isAnswered()
 {
 	return this->answered;
+}
+
+bool UserAnswer::isMarked()
+{
+	return this->flag;
+}
+
+bool UserAnswer::isRight()
+{
+	return this->right;
+}
+
+bool UserAnswer::isHalf()
+{
+	return this->half;
+}
+
+void UserAnswer::setMarked(bool flag)
+{
+	this->flag = flag;
 }
 
 

@@ -13,7 +13,8 @@
 #include <JudgeExercise.h>
 #include <FillInTheBlanksExercise.h>
 #include <SAQExercise.h>
-
+#include <Analysis.h>
+#include <SelectExercise.h>
 class ExerciseResult :
 	public QMainWindow
 {
@@ -24,7 +25,7 @@ public:
 	~ExerciseResult();
 private slots:
 	void slotExerciseSelected(QListWidgetItem* item);
-
+	void slotBackToExerciseSelect();
 private:
 	QLabel* labelHeadpartrait;
 	QLabel* labelUsername;
@@ -40,6 +41,7 @@ private:
 	Answer* systemAnswer;
 	QWidget* widgetStudentAnswer;
 	Answer* studentAnswer;
+	Analysis* analysis;
 	ExerciseList* listwidgetExercise;
 };
 

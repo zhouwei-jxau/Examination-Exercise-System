@@ -28,6 +28,7 @@ protected:
 private slots:
 	void slotCommit();
 	void slotExerciseSelected(QListWidgetItem* item);
+	void slotExerciseDoubleClicked(QListWidgetItem* item);
 	void slotAnswerChanged();
 private:
 	QLabel* imageHeadpartrait;
@@ -43,4 +44,5 @@ private:
 	Answer* answer;
 
 	int currentExerciseIndex;
+	int currentExerciseItemIndex;
 };

@@ -151,6 +151,9 @@
     <ClCompile Include="ExerciseResult.cpp">
       <Filter>Source Files\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Analysis.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="UserAnswer.h">
       <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Analysis.h">
+      <Filter>Header Files\Widget</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

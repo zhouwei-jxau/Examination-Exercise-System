@@ -74,6 +74,7 @@ void CheckAnswers::Check()
 				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfChoice()) / CurrentUser::getExerciseSet().getNumberOfChoice();
 				this->rightOfChoice++;
 				this->markOfChoice += mark;
+				answer->right = true;
 			}
 		}
 
@@ -90,6 +91,7 @@ void CheckAnswers::Check()
 				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfJudge()) / CurrentUser::getExerciseSet().getNumberOfJudge();
 				this->rightOfJudge++;
 				this->markOfJudge += mark;
+				answer->right = true;
 			}
 		}
 
@@ -111,6 +113,14 @@ void CheckAnswers::Check()
 			mark=(static_cast<double>(numOfRightFillInTheBlanks)/static_cast<FillInTheBlanksExercise*>(exercise)->getNumOfBlanks())*
 				static_cast<double>(CurrentUser::getExerciseSet().getMarkOfFillInTheBlanks()) / CurrentUser::getExerciseSet().getNumberFillInTheBlanks();
 			this->markOfFillInTheBlanks += mark;
+			if (mark > 0)
+			{
+				answer->right = true;
+				if (numOfRightFillInTheBlanks < static_cast<FillInTheBlanksExercise*>(exercise)->getNumOfBlanks())
+				{
+					answer->half = true;
+				}
+			}
 		}
 
 		if (exercise->getType() == Exercise::ExerciseType::SAQ)
@@ -123,6 +133,7 @@ void CheckAnswers::Check()
 				this->rightOfSAQ++;
 				mark = static_cast<double>(CurrentUser::getExerciseSet().getMarkOfSAQ()) / CurrentUser::getExerciseSet().getNumberOfSAQ();
 				this->markOfSAQ += mark;
+				answer->right = true;
 			}
 		}
 

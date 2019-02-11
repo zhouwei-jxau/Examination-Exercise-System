@@ -7,6 +7,7 @@ ExerciseResult::ExerciseResult(QWidget *parent, Qt::WindowFlags flags)
 {
 	this->systemAnswer = NULL;
 	this->studentAnswer = NULL;
+	this->setAttribute(Qt::WA_DeleteOnClose, true);
 	this->setWindowTitle(QString::fromLocal8Bit("考试结束"));
 	this->setWindowState(Qt::WindowState::WindowMaximized);
 	this->setCentralWidget(new QWidget());
@@ -104,6 +105,7 @@ ExerciseResult::ExerciseResult(QWidget *parent, Qt::WindowFlags flags)
 	splitter->setChildrenCollapsible(false);
 	listwidgetExercise = new ExerciseList();
 	ExerciseSet exerciseSet = CurrentUser::getExerciseSet();
+	listwidgetExercise->setShowCheckResult(true);
 	listwidgetExercise->addExerciseSet(exerciseSet);
 	splitter->addWidget(listwidgetExercise);
 	QFrame* widgetAnswer = new QFrame();
@@ -113,8 +115,11 @@ ExerciseResult::ExerciseResult(QWidget *parent, Qt::WindowFlags flags)
 	widgetSystemAnswer->setLayout(new QVBoxLayout());
 	widgetStudentAnswer = new QWidget();
 	widgetStudentAnswer->setLayout(new QVBoxLayout());
+	this->analysis = new Analysis();
+	this->analysis->setAnalysis(QString::fromLocal8Bit("略"));
 	tabwidgetAnswer->insertTab(0, widgetSystemAnswer, QString::fromLocal8Bit("参考答案"));
 	tabwidgetAnswer->insertTab(1, widgetStudentAnswer, QString::fromLocal8Bit("学生答案"));
+	tabwidgetAnswer->insertTab(2, this->analysis, QString::fromLocal8Bit("答案解析"));
 	widgetAnswer->setLayout(new QVBoxLayout());
 	widgetAnswer->setMinimumHeight(200);
 	widgetAnswer->layout()->addWidget(tabwidgetAnswer);
@@ -128,10 +133,10 @@ ExerciseResult::ExerciseResult(QWidget *parent, Qt::WindowFlags flags)
 	//选中第一题
 	if(this->listwidgetExercise->count()>1)
 		this->listwidgetExercise->setItemSelected(this->listwidgetExercise->item(1), true);
-	qDebug() << CurrentUser::getExerciseSet().getExercise();
 	if(exerciseSet.getExercise().size()>0)
 		this->setAnswer(exerciseSet.getExercise().at(0));
 	connect(this->listwidgetExercise, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotExerciseSelected(QListWidgetItem*)));
+	connect(this->buttonBackToSelectExercise, SIGNAL(clicked()), this, SLOT(slotBackToExerciseSelect()));
 }
 
 void ExerciseResult::setAnswer(Exercise * exercise)
@@ -226,11 +231,21 @@ void ExerciseResult::setAnswer(Exercise * exercise)
 		int index = CurrentUser::getExerciseSet().indexOf(exercise);
 		this->studentAnswer->setAnswer(CurrentUser::getExerciseSet().getAnswers().at(index)->getAnswer());
 	}
+	this->studentAnswer->setEditable(false);
+	this->systemAnswer->setEditable(false);
 }
 
 
 ExerciseResult::~ExerciseResult()
 {
+	CurrentUser::clearWithoutLogOut();
+}
+
+void ExerciseResult::slotBackToExerciseSelect()
+{
+	SelectExercise* selectExercise = new SelectExercise();
+	selectExercise->show();
+	this->close();
 }
 
 void ExerciseResult::slotExerciseSelected(QListWidgetItem * item)

@@ -150,6 +150,21 @@ double CurrentUser::getMarkOfSAQ()
 	return CurrentUser::markOfSAQ;
 }
 
+void CurrentUser::clearWithoutLogOut()
+{
+	CurrentUser::exerciseSet.clear();
+	CurrentUser::singleMark.clear();
+	CurrentUser::rightOfChoice = 0;
+	CurrentUser::rightOfJudge = 0;
+	CurrentUser::rightOfFillInTheBlanks = 0;
+	CurrentUser::rightOfSAQ = 0;
+	CurrentUser::markOfChoice = 0;
+	CurrentUser::markOfJudge = 0;
+	CurrentUser::markOfFillInTheBlanks = 0;
+	CurrentUser::markOfSAQ = 0;
+	CurrentUser::mark = 0;
+}
+
 
 CurrentUser::~CurrentUser()
 {

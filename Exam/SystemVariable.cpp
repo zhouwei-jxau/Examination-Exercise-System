@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SystemVariable.h"
 
-const char* const SystemVariable::SERVER = "127.0.0.1";
+const char* const SystemVariable::SERVER = "134.175.244.141";
 const char* const SystemVariable::CHECKVERSIONSERVLET = "Exam_Exercise_System/CheckVersionServlet";
 const char* const SystemVariable::REGISTSERVLET = "Exam_Exercise_System/RegistServlet";
 const char* const SystemVariable::LOGINSERVLET = "Exam_Exercise_System/LoginServlet";
@@ -23,6 +23,11 @@ SystemVariable::SystemVariable()
 QString SystemVariable::getImagePath()
 {
 	return QString::fromLocal8Bit(SystemVariable::RESOURCEPATH)+QString::fromLocal8Bit(SystemVariable::THEMEPATH)+QString::fromLocal8Bit(SystemVariable::IMAGEPATH);
+}
+
+QString SystemVariable::getIconPath()
+{
+	return QString::fromLocal8Bit(SystemVariable::RESOURCEPATH) + QString::fromLocal8Bit(SystemVariable::THEMEPATH) + QString::fromLocal8Bit(SystemVariable::ICONPTH);;
 }
 
 

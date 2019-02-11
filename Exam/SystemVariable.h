@@ -20,6 +20,7 @@ public:
 public:
 	SystemVariable();
 	static QString getImagePath();
+	static QString getIconPath();
 	~SystemVariable();
 };
 

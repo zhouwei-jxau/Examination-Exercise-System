@@ -5,8 +5,10 @@ ExamClient::ExamClient(QWidget *parent)
 	: QMainWindow(parent)
 {
 	this->currentExerciseIndex = 0;
+	this->currentExerciseItemIndex = 1;
 	this->setWindowTitle(QString::fromLocal8Bit("考试客户端"));
 	this->setWindowState(Qt::WindowState::WindowMaximized);
+	this->setAttribute(Qt::WA_DeleteOnClose, true);
 	this->setCentralWidget(new QWidget());
 	this->imageHeadpartrait = new QLabel();
 	this->imageHeadpartrait->setFixedSize(QSize(90,90));
@@ -120,6 +122,7 @@ ExamClient::ExamClient(QWidget *parent)
 		this->listwidgetExercise->addExercise(CurrentUser::getExerciseSet().getExercise().at(i),i);
 	}
 	connect(this->listwidgetExercise, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotExerciseSelected(QListWidgetItem*)));
+	connect(this->listwidgetExercise, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotExerciseDoubleClicked(QListWidgetItem*)));
 }
 
 void ExamClient::slotCommit()
@@ -221,6 +224,7 @@ void ExamClient::slotExerciseSelected(QListWidgetItem * item)
 	ExerciseListItem* eItem = static_cast<ExerciseListItem*>(item);
 	if (this->listwidgetExercise->isUnSubjectItem(item))
 		return;
+	this->currentExerciseItemIndex = this->listwidgetExercise->row(item);
 	int  index = eItem->getIndexInExerciseSet();
 	this->currentExerciseIndex = index;
 	this->texteditSubject->setText(CurrentUser::getExerciseSet().getExercise().at(index)->getSubject());
@@ -232,11 +236,36 @@ void ExamClient::slotExerciseSelected(QListWidgetItem * item)
 	this->labelTip->setText(QString::fromLocal8Bit("当前第") + QString::number(this->currentExerciseIndex + 1) + QString::fromLocal8Bit("题"));
 }
 
+void ExamClient::slotExerciseDoubleClicked(QListWidgetItem * item)
+{
+	if (this->listwidgetExercise->isUnSubjectItem(item))
+		return;
+	int index = static_cast<ExerciseListItem*>(item)->getIndexInExerciseSet();
+	if (static_cast<ExerciseListItem*>(item)->getStatus() == Exercise::ExerciseStatus::Flag)
+	{
+		if (CurrentUser::getExerciseSet().getAnswers().at(index)->isAnswered())
+		{
+			static_cast<ExerciseListItem*>(item)->setStatus(Exercise::ExerciseStatus::Finished);
+		}
+		else
+		{
+			static_cast<ExerciseListItem*>(item)->setStatus(Exercise::ExerciseStatus::UnFinished);
+		}
+		CurrentUser::getExerciseSet().getAnswers().at(index)->setMarked(false);
+	}
+	else
+	{
+		static_cast<ExerciseListItem*>(item)->setStatus(Exercise::ExerciseStatus::Flag);
+		CurrentUser::getExerciseSet().getAnswers().at(index)->setMarked(true);
+	}
+}
+
 void ExamClient::slotAnswerChanged()
 {
 	UserAnswer userAnswer;
 	userAnswer.setAnswer(this->answer->getAnswer());
 	userAnswer.setType(this->answer->getType());
+	static_cast<ExerciseListItem*>(this->listwidgetExercise->item(this->currentExerciseItemIndex))->setStatus(Exercise::ExerciseStatus::Finished);
 	if(this->answer->isAnswered())
 		CurrentUser::getExerciseSet().setAnswer(userAnswer,this->currentExerciseIndex);
 }

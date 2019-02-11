@@ -2,6 +2,16 @@
 class Exercise
 {
 public:
+	enum ExerciseStatus
+	{
+		Finished,
+		UnFinished,
+		Right,
+		Error,
+		Flag,
+		Half,
+		None
+	};
 	enum ExerciseType
 	{
 		Choice,

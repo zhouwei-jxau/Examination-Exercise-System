@@ -10,7 +10,7 @@ public:
 	static QString getUserName();
 	static void setAccount(QString account);
 	static QString getAccount();
-	static void setExerciseSet(ExerciseSet exerciseSet);
+	static void setExerciseSet(class ExerciseSet exerciseSet);
 	static ExerciseSet& getExerciseSet();
 	static void setSingleMarkList(QList<double> list);
 	static QList<double>& getSingleMarkList();
@@ -32,11 +32,12 @@ public:
 	static double getMarkOfFillInTheBlanks();
 	static void setMarkOfSAQ(double mark);
 	static double getMarkOfSAQ();
+	static void clearWithoutLogOut();
 	~CurrentUser();
 private:
 	static QString account;
 	static QString username;
-	static ExerciseSet exerciseSet;
+	static class ExerciseSet exerciseSet;
 	static QList<double> singleMark;
 	static int rightOfChoice;
 	static int rightOfJudge;

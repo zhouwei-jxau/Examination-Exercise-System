@@ -3,6 +3,7 @@
 #include <Exercise.h>
 #include <ExerciseListItem.h>
 #include <ExerciseSet.h>
+#include <CurrentUser.h>
 class ExerciseList :
 	public QListWidget
 {
@@ -14,8 +15,10 @@ public:
 	void addJudge(QString subject, int index = -1);
 	void addFillInTheBlanks(QString subject, int index = -1);
 	void addSAQ(QString subject, int index = -1);
-	void addExerciseSet(ExerciseSet exerciseSet);
+	void addExerciseSet(class ExerciseSet exerciseSet);
 	bool isUnSubjectItem(QListWidgetItem* item);
+	void setShowCheckResult(bool show);
+	bool isShowCheckResult();
 	~ExerciseList();
 private slots:
 	void slotItemClicked(QListWidgetItem* item);
@@ -43,5 +46,6 @@ private:
 	QString pathOfUnFold;
 
 	QList<QListWidgetItem*> unSubjectItems;
+	bool showCheckResult;
 };
 

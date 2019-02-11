@@ -174,6 +174,26 @@ QList<UserAnswer*> ExerciseSet::getAnswers()
 	return this->answerList;
 }
 
+void ExerciseSet::clear()
+{
+	for (int i = 0; i < this->list.size(); i++)
+	{
+		delete this->list.at(i);
+		delete this->answerList.at(i);
+	}
+	this->list.clear();
+	this->answerList.clear();
+	this->name = "";
+	this->markOfChoice = 0;
+	this->markOfJudge = 0;
+	this->markOfFillInTheBlanks = 0;
+	this->markOfSAQ = 0;
+	this->numOfChoice = 0;
+	this->numOfJudge = 0;
+	this->numOfFillInTheBlanks = 0;
+	this->numOfSAQ = 0;
+}
+
 
 ExerciseSet::~ExerciseSet()
 {

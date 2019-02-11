@@ -29,10 +29,11 @@ public:
 	void setNumberOfSAQ(int number);
 	int getNumberOfSAQ();
 	void addExercise(Exercise* exercise);
-	void setAnswer(UserAnswer answer,int index);
+	void setAnswer(class UserAnswer answer,int index);
 	int indexOf(Exercise* exercise);
 	QList<Exercise*> getExercise();
 	QList<UserAnswer*> getAnswers();
+	void clear();
 	~ExerciseSet();
 private:
 	QString name;
