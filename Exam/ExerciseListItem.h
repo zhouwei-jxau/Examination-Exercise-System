@@ -13,6 +13,7 @@ public:
 	void setText(QString text);
 	Exercise::ExerciseStatus getStatus();
 	int getIndexInExerciseSet();
+	void setIconVisiable(bool visiable);
 	~ExerciseListItem();
 private:
 	int indexInExerciseSet;
@@ -23,5 +24,6 @@ private:
 	QPixmap mapFlag;
 	QPixmap mapHalf;
 	Exercise::ExerciseStatus status;
+	bool visiable;
 };
 

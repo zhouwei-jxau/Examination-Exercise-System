@@ -366,6 +366,7 @@ void ErrorBook::slotGetErrorExercise(QNetworkReply * reply)
 	{
 		this->listwidgetExercise->addExercise(this->errorExerciseList.at(i)->getExercise(),i);
 	}
+	this->listwidgetExercise->setIconVisiable(false);
 	//更新数据
 	this->setCollection(this->errorExerciseList.size());
 }

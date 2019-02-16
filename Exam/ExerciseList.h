@@ -19,6 +19,7 @@ public:
 	bool isUnSubjectItem(QListWidgetItem* item);
 	void setShowCheckResult(bool show);
 	bool isShowCheckResult();
+	void setIconVisiable(bool visiable);
 	~ExerciseList();
 signals:
 	void signalAddToErrorBookClicked();

@@ -81,7 +81,7 @@ ExerciseList::ExerciseList()
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetFillInTheBlanksFolder);
 	this->itemFillInTheBlanksFolder = item;
-	item = new QListWidgetItem();	
+	item = new QListWidgetItem();
 	this->unSubjectItems.append(item);
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
@@ -93,27 +93,27 @@ ExerciseList::ExerciseList()
 }
 
 
-void ExerciseList::addExercise(Exercise * exercise,int index)
+void ExerciseList::addExercise(Exercise * exercise, int index)
 {
 	if (exercise->getType() == Exercise::ExerciseType::Choice)
 	{
-		this->addChoice(exercise->getSubject(),index);
+		this->addChoice(exercise->getSubject(), index);
 	}
 	if (exercise->getType() == Exercise::ExerciseType::Judge)
 	{
-		this->addJudge(exercise->getSubject(),index);
+		this->addJudge(exercise->getSubject(), index);
 	}
 	if (exercise->getType() == Exercise::ExerciseType::FillInTheBlanks)
 	{
-		this->addFillInTheBlanks(exercise->getSubject(),index);
+		this->addFillInTheBlanks(exercise->getSubject(), index);
 	}
 	if (exercise->getType() == Exercise::ExerciseType::SAQ)
 	{
-		this->addSAQ(exercise->getSubject(),index);
+		this->addSAQ(exercise->getSubject(), index);
 	}
 }
 
-void ExerciseList::addChoice(QString subject,int index)
+void ExerciseList::addChoice(QString subject, int index)
 {
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
@@ -131,8 +131,8 @@ void ExerciseList::addChoice(QString subject,int index)
 	widget->layout()->setContentsMargins(0, 0, 0, 0);
 	widget->layout()->setAlignment(Qt::AlignLeft);
 	widget->layout()->addWidget(addToErrorBook);
-	this->insertItem(this->row(this->itemJudgeFolder),item);
-	this->setItemWidget(item,widget);
+	this->insertItem(this->row(this->itemJudgeFolder), item);
+	this->setItemWidget(item, widget);
 	this->numOfChoice++;
 	if (this->isShowCheckResult())
 	{
@@ -196,7 +196,7 @@ void ExerciseList::addChoice(QString subject,int index)
 	}
 }
 
-void ExerciseList::addJudge(QString subject,int index)
+void ExerciseList::addJudge(QString subject, int index)
 {
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
@@ -278,7 +278,7 @@ void ExerciseList::addJudge(QString subject,int index)
 	}
 }
 
-void ExerciseList::addFillInTheBlanks(QString subject,int index)
+void ExerciseList::addFillInTheBlanks(QString subject, int index)
 {
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
@@ -360,7 +360,7 @@ void ExerciseList::addFillInTheBlanks(QString subject,int index)
 	}
 }
 
-void ExerciseList::addSAQ(QString subject,int index)
+void ExerciseList::addSAQ(QString subject, int index)
 {
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
@@ -446,7 +446,7 @@ void ExerciseList::addExerciseSet(ExerciseSet exerciseSet)
 {
 	for (int i = 0; i < exerciseSet.getExercise().size(); i++)
 	{
-		this->addExercise(exerciseSet.getExercise().at(i),i);
+		this->addExercise(exerciseSet.getExercise().at(i), i);
 	}
 }
 
@@ -472,6 +472,22 @@ bool ExerciseList::isShowCheckResult()
 	return this->showCheckResult;
 }
 
+void ExerciseList::setIconVisiable(bool visiable)
+{
+	for (int i = 0; i < this->count(); i++)
+	{
+		if (this->isUnSubjectItem(this->item(i)))
+			continue;
+		static_cast<ExerciseListItem*>(this->item(i))->setIconVisiable(visiable);
+	}
+
+	for (int i = 0; i < this->buttonGroup->buttons().size(); i++)
+	{
+		QAbstractButton* button = this->buttonGroup->buttons().at(i);
+		button->setHidden(!visiable);
+	}
+}
+
 ExerciseList::~ExerciseList()
 {
 }
@@ -489,7 +505,7 @@ void ExerciseList::slotAddToErrorBookClicked(QAbstractButton *button)
 		+ QString::fromLocal8Bit("&exercise_type=")
 		+ QString::number(CurrentUser::getExerciseSet().getExercise().at(this->addToErrorBookButtonIndexInExerciseSet.value(static_cast<QPushButton*>(button)))->getType())
 		+ QString::fromLocal8Bit("&account=") + CurrentUser::getAccount();
-	httpManager->post(request,param.toLocal8Bit());
+	httpManager->post(request, param.toLocal8Bit());
 	emit signalAddToErrorBookClicked();
 }
 
@@ -554,7 +570,7 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		if (this->isJudgeFold)
 		{
 			static_cast<QLabel*>(this->widgetJudgeFolder->children().at(1))->setPixmap(QPixmap(this->pathOfUnFold));
-			int start = this->row(this->itemJudgeFolder)+1;
+			int start = this->row(this->itemJudgeFolder) + 1;
 			int end = this->row(this->itemFillInTheBlanksFolder);
 			for (int i = start; i < end; i++)
 			{

@@ -4,6 +4,7 @@
 QString ExerciseListItem::PATHOFADDTOERRORBOOKICONPATH = QString::fromLocal8Bit("addToErrorBook.png");
 ExerciseListItem::ExerciseListItem()
 {
+	this->visiable = true;
 	this->mapFinished = QPixmap(SystemVariable::getIconPath() + QString::fromLocal8Bit("finished.png"));
 	this->mapUnFinished = QPixmap(SystemVariable::getIconPath() + QString::fromLocal8Bit("unfinished.png"));
 	this->mapRight = QPixmap(SystemVariable::getIconPath() + QString::fromLocal8Bit("right.png"));
@@ -21,6 +22,8 @@ void ExerciseListItem::setIndexInExerciseSet(int index)
 void ExerciseListItem::setStatus(Exercise::ExerciseStatus status)
 {
 	this->status = status;
+	if (this->visiable == false)
+		return;
 	if (status == Exercise::ExerciseStatus::Finished)
 	{
 		this->setIcon(QIcon(this->mapFinished));
@@ -60,6 +63,21 @@ Exercise::ExerciseStatus ExerciseListItem::getStatus()
 int ExerciseListItem::getIndexInExerciseSet()
 {
 	return this->indexInExerciseSet;
+}
+
+void ExerciseListItem::setIconVisiable(bool visiable)
+{
+	this->visiable = visiable;
+	if (!this->visiable)
+	{
+		this->setIcon(QIcon());
+		this->QListWidgetItem::setText(this->text().trimmed());
+	}
+	else
+	{
+		this->setStatus(this->status);
+		this->setText(this->text());
+	}
 }
 
 
