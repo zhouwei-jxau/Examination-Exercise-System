@@ -17,6 +17,7 @@ private slots:
 private:
 	QButtonGroup* group;
 	QListWidget* listWidget;
+	QList<QRadioButton*> buttons;
 	QHash<QRadioButton*, int> options;
 };
 

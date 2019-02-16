@@ -10,6 +10,8 @@ public:
 	const static char* const LOGINSERVLET;
 	const static char* const GETEXERCISESET;
 	const static char* const GETEXERCISESERVLET;
+	const static char* const ADDTOERRORBOOKSERVLET;
+	const static char* const GETERROREXERCISESERVLET;
 	const static char* const CONFIGPATH;
 	const static char* const USERFILENAME;
 	const static char* const RESOURCEPATH;

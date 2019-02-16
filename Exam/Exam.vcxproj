@@ -131,15 +131,19 @@
     <ClCompile Include="CheckVersion.cpp" />
     <ClCompile Include="ChoiceExercise.cpp" />
     <ClCompile Include="CurrentUser.cpp" />
+    <ClCompile Include="ErrorBook.cpp" />
+    <ClCompile Include="ErrorExercise.cpp" />
     <ClCompile Include="ExamClient.cpp" />
     <ClCompile Include="Exercise.cpp" />
     <ClCompile Include="ExerciseList.cpp" />
     <ClCompile Include="ExerciseListItem.cpp" />
     <ClCompile Include="ExerciseResult.cpp" />
     <ClCompile Include="ExerciseSet.cpp" />
+    <ClCompile Include="ExerciseTable.cpp" />
     <ClCompile Include="FillInTheBlanksExercise.cpp" />
     <ClCompile Include="GenerateExercise.cpp" />
     <ClCompile Include="JudgeExercise.cpp" />
+    <ClCompile Include="LineEditWithTag.cpp" />
     <ClCompile Include="LinkButton.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,6 +168,13 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
     <ClInclude Include="Analysis.h" />
+    <QtMoc Include="ErrorBook.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+    <ClInclude Include="ErrorExercise.h" />
+    <ClInclude Include="ExerciseTable.h" />
+    <ClInclude Include="LineEditWithTag.h" />
     <ClInclude Include="UserAnswer.h" />
     <QtMoc Include="CheckVersion.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtWidgets</IncludePath>

@@ -5,9 +5,12 @@ class ExerciseListItem :
 	public QListWidgetItem
 {
 public:
+	static QString PATHOFADDTOERRORBOOKICONPATH;
+public:
 	ExerciseListItem();
 	void setIndexInExerciseSet(int index);
 	void setStatus(Exercise::ExerciseStatus status);
+	void setText(QString text);
 	Exercise::ExerciseStatus getStatus();
 	int getIndexInExerciseSet();
 	~ExerciseListItem();

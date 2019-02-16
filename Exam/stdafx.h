@@ -1,4 +1,5 @@
 #include <QtWidgets>
+#include <qglobal.h>
 #include <qnetworkaccessmanager.h>
 #include <qhostaddress.h>
 #include <qnetworkrequest.h>

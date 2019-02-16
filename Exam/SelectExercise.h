@@ -3,6 +3,7 @@
 #include <GenerateExercise.h>
 #include "Login.h"
 #include "ExamClient.h"
+#include <ErrorBook.h>
 class SelectExercise :
 	public QMainWindow
 {

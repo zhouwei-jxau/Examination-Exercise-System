@@ -80,15 +80,16 @@ ExerciseList::ExerciseList()
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetFillInTheBlanksFolder);
-	this->itemFillInTheBlanks = item;
+	this->itemFillInTheBlanksFolder = item;
 	item = new QListWidgetItem();	
 	this->unSubjectItems.append(item);
 	item->setSizeHint(QSize(-1, 32));
 	this->addItem(item);
 	this->setItemWidget(item, this->widgetSAQFolder);
-	this->itemSAQ = item;
-
+	this->itemSAQFolder = item;
+	this->buttonGroup = new QButtonGroup(this);
 	connect(this, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
+	connect(this->buttonGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(slotAddToErrorBookClicked(QAbstractButton *)));
 }
 
 
@@ -117,7 +118,21 @@ void ExerciseList::addChoice(QString subject,int index)
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
 	item->setText(QString::number(this->numOfChoice + 1) + "." + subject);
+	QWidget* widget = new QWidget();
+	QPushButton* addToErrorBook = new QPushButton();
+	addToErrorBook->setIcon(QIcon(SystemVariable::getIconPath() + ExerciseListItem::PATHOFADDTOERRORBOOKICONPATH));
+	addToErrorBook->setIconSize(QSize(14, 14));
+	addToErrorBook->setFlat(true);
+	addToErrorBook->setFixedSize(QSize(16, 16));
+	addToErrorBook->setToolTip(QString::fromLocal8Bit("添加到错题本"));
+	buttonGroup->addButton(addToErrorBook);
+	this->addToErrorBookButtonIndexInExerciseSet.insert(addToErrorBook, index);
+	widget->setLayout(new QHBoxLayout());
+	widget->layout()->setContentsMargins(0, 0, 0, 0);
+	widget->layout()->setAlignment(Qt::AlignLeft);
+	widget->layout()->addWidget(addToErrorBook);
 	this->insertItem(this->row(this->itemJudgeFolder),item);
+	this->setItemWidget(item,widget);
 	this->numOfChoice++;
 	if (this->isShowCheckResult())
 	{
@@ -147,6 +162,38 @@ void ExerciseList::addChoice(QString subject,int index)
 			item->setStatus(Exercise::ExerciseStatus::Flag);
 		}
 	}
+	if (this->numOfChoice == 0)
+	{
+		this->itemChoiceFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemChoiceFolder->setHidden(false);
+	}
+	if (this->numOfFillInTheBlanks == 0)
+	{
+		this->itemFillInTheBlanksFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemFillInTheBlanksFolder->setHidden(false);
+	}
+	if (this->numOfJudge == 0)
+	{
+		this->itemJudgeFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemJudgeFolder->setHidden(false);
+	}
+	if (this->numOfSAQ == 0)
+	{
+		this->itemSAQFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemSAQFolder->setHidden(false);
+	}
 }
 
 void ExerciseList::addJudge(QString subject,int index)
@@ -154,7 +201,20 @@ void ExerciseList::addJudge(QString subject,int index)
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
 	item->setText(QString::number(this->numOfJudge + 1) + "." + subject);
-	this->insertItem(this->row(this->itemFillInTheBlanks), item);
+	QWidget* widget = new QWidget();
+	QPushButton* addToErrorBook = new QPushButton();
+	addToErrorBook->setIcon(QIcon(SystemVariable::getIconPath() + ExerciseListItem::PATHOFADDTOERRORBOOKICONPATH));
+	addToErrorBook->setIconSize(QSize(14, 14));
+	addToErrorBook->setFlat(true);
+	addToErrorBook->setFixedSize(QSize(16, 16));
+	addToErrorBook->setToolTip(QString::fromLocal8Bit("添加到错题本"));
+	buttonGroup->addButton(addToErrorBook);
+	this->addToErrorBookButtonIndexInExerciseSet.insert(addToErrorBook, index);	widget->setLayout(new QHBoxLayout());
+	widget->layout()->setContentsMargins(0, 0, 0, 0);
+	widget->layout()->setAlignment(Qt::AlignLeft);
+	widget->layout()->addWidget(addToErrorBook);
+	this->insertItem(this->row(this->itemFillInTheBlanksFolder), item);
+	this->setItemWidget(item, widget);
 	this->numOfJudge++;
 	if (this->isShowCheckResult())
 	{
@@ -184,6 +244,38 @@ void ExerciseList::addJudge(QString subject,int index)
 			item->setStatus(Exercise::ExerciseStatus::Flag);
 		}
 	}
+	if (this->numOfChoice == 0)
+	{
+		this->itemChoiceFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemChoiceFolder->setHidden(false);
+	}
+	if (this->numOfFillInTheBlanks == 0)
+	{
+		this->itemFillInTheBlanksFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemFillInTheBlanksFolder->setHidden(false);
+	}
+	if (this->numOfJudge == 0)
+	{
+		this->itemJudgeFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemJudgeFolder->setHidden(false);
+	}
+	if (this->numOfSAQ == 0)
+	{
+		this->itemSAQFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemSAQFolder->setHidden(false);
+	}
 }
 
 void ExerciseList::addFillInTheBlanks(QString subject,int index)
@@ -191,7 +283,20 @@ void ExerciseList::addFillInTheBlanks(QString subject,int index)
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
 	item->setText(QString::number(this->numOfFillInTheBlanks + 1) + "." + subject);
-	this->insertItem(this->row(this->itemSAQ), item);
+	QWidget* widget = new QWidget();
+	QPushButton* addToErrorBook = new QPushButton();
+	addToErrorBook->setIcon(QIcon(SystemVariable::getIconPath() + ExerciseListItem::PATHOFADDTOERRORBOOKICONPATH));
+	addToErrorBook->setIconSize(QSize(14, 14));
+	addToErrorBook->setFlat(true);
+	addToErrorBook->setFixedSize(QSize(16, 16));
+	addToErrorBook->setToolTip(QString::fromLocal8Bit("添加到错题本"));
+	buttonGroup->addButton(addToErrorBook);
+	this->addToErrorBookButtonIndexInExerciseSet.insert(addToErrorBook, index);	widget->setLayout(new QHBoxLayout());
+	widget->layout()->setContentsMargins(0, 0, 0, 0);
+	widget->layout()->setAlignment(Qt::AlignLeft);
+	widget->layout()->addWidget(addToErrorBook);
+	this->insertItem(this->row(this->itemSAQFolder), item);
+	this->setItemWidget(item, widget);
 	this->numOfFillInTheBlanks++;
 	if (this->isShowCheckResult())
 	{
@@ -221,6 +326,38 @@ void ExerciseList::addFillInTheBlanks(QString subject,int index)
 			item->setStatus(Exercise::ExerciseStatus::Flag);
 		}
 	}
+	if (this->numOfChoice == 0)
+	{
+		this->itemChoiceFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemChoiceFolder->setHidden(false);
+	}
+	if (this->numOfFillInTheBlanks == 0)
+	{
+		this->itemFillInTheBlanksFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemFillInTheBlanksFolder->setHidden(false);
+	}
+	if (this->numOfJudge == 0)
+	{
+		this->itemJudgeFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemJudgeFolder->setHidden(false);
+	}
+	if (this->numOfSAQ == 0)
+	{
+		this->itemSAQFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemSAQFolder->setHidden(false);
+	}
 }
 
 void ExerciseList::addSAQ(QString subject,int index)
@@ -228,8 +365,20 @@ void ExerciseList::addSAQ(QString subject,int index)
 	ExerciseListItem* item = new ExerciseListItem();
 	item->setIndexInExerciseSet(index);
 	item->setText(QString::number(this->numOfSAQ + 1) + "." + subject);
+	QWidget* widget = new QWidget();
+	QPushButton* addToErrorBook = new QPushButton();
+	addToErrorBook->setIcon(QIcon(SystemVariable::getIconPath() + ExerciseListItem::PATHOFADDTOERRORBOOKICONPATH));
+	addToErrorBook->setIconSize(QSize(14, 14));
+	addToErrorBook->setFlat(true);
+	addToErrorBook->setFixedSize(QSize(16, 16));
+	addToErrorBook->setToolTip(QString::fromLocal8Bit("添加到错题本"));
+	buttonGroup->addButton(addToErrorBook);
+	this->addToErrorBookButtonIndexInExerciseSet.insert(addToErrorBook, index);	widget->setLayout(new QHBoxLayout());
+	widget->layout()->setContentsMargins(0, 0, 0, 0);
+	widget->layout()->setAlignment(Qt::AlignLeft);
+	widget->layout()->addWidget(addToErrorBook);
 	this->addItem(item);
-	this->numOfSAQ++;
+	this->setItemWidget(item, widget);	this->numOfSAQ++;
 
 	if (this->isShowCheckResult())
 	{
@@ -258,6 +407,38 @@ void ExerciseList::addSAQ(QString subject,int index)
 		{
 			item->setStatus(Exercise::ExerciseStatus::Flag);
 		}
+	}
+	if (this->numOfChoice == 0)
+	{
+		this->itemChoiceFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemChoiceFolder->setHidden(false);
+	}
+	if (this->numOfFillInTheBlanks == 0)
+	{
+		this->itemFillInTheBlanksFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemFillInTheBlanksFolder->setHidden(false);
+	}
+	if (this->numOfJudge == 0)
+	{
+		this->itemJudgeFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemJudgeFolder->setHidden(false);
+	}
+	if (this->numOfSAQ == 0)
+	{
+		this->itemSAQFolder->setHidden(true);
+	}
+	else
+	{
+		this->itemSAQFolder->setHidden(false);
 	}
 }
 
@@ -295,6 +476,52 @@ ExerciseList::~ExerciseList()
 {
 }
 
+void ExerciseList::slotAddToErrorBookClicked(QAbstractButton *button)
+{
+	QNetworkAccessManager* httpManager = new QNetworkAccessManager(this);
+	QObject::connect(httpManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotGetAddtoErrorBookStatus(QNetworkReply*)));
+	QString url = QString("http://") + SystemVariable::SERVER + ":" + QString::number(SystemVariable::SERVERPORT) + "/" + SystemVariable::ADDTOERRORBOOKSERVLET;
+	QNetworkRequest request;
+	request.setUrl(url);
+	request.setHeader(QNetworkRequest::KnownHeaders::ContentTypeHeader, "application/x-www-form-urlencoded;charset=utf-8");
+	QString param = QString::fromLocal8Bit("exercise_no=")
+		+ QString::number(CurrentUser::getExerciseSet().getExercise().at(this->addToErrorBookButtonIndexInExerciseSet.value(static_cast<QPushButton*>(button)))->getExerciseNo())
+		+ QString::fromLocal8Bit("&exercise_type=")
+		+ QString::number(CurrentUser::getExerciseSet().getExercise().at(this->addToErrorBookButtonIndexInExerciseSet.value(static_cast<QPushButton*>(button)))->getType())
+		+ QString::fromLocal8Bit("&account=") + CurrentUser::getAccount();
+	httpManager->post(request,param.toLocal8Bit());
+	emit signalAddToErrorBookClicked();
+}
+
+void ExerciseList::slotGetAddtoErrorBookStatus(QNetworkReply * reply)
+{
+	QByteArray data;
+	QByteArray buffer;
+	while ((buffer = reply->readLine()).length() > 0)
+	{
+		data.append(buffer);
+	}
+	if (reply->attribute(QNetworkRequest::Attribute::HttpStatusCodeAttribute).toInt() != 200)
+	{
+		QMessageBox messageBox;
+		messageBox.about(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("添加失败，请检查网络连接!"));
+		return;
+	}
+	QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+	QJsonObject json = jsonDoc.object();
+	int responseCode = json.value("responseCode").toInt();
+	if (responseCode)
+	{
+		QMessageBox messageBox;
+		messageBox.about(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("添加成功"));
+	}
+	else
+	{
+		QMessageBox messageBox;
+		messageBox.about(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("添加成功"));
+	}
+}
+
 void ExerciseList::slotItemClicked(QListWidgetItem * item)
 {
 	if (this->itemWidget(item) == this->widgetChoiceFolder)
@@ -328,7 +555,7 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		{
 			static_cast<QLabel*>(this->widgetJudgeFolder->children().at(1))->setPixmap(QPixmap(this->pathOfUnFold));
 			int start = this->row(this->itemJudgeFolder)+1;
-			int end = this->row(this->itemFillInTheBlanks);
+			int end = this->row(this->itemFillInTheBlanksFolder);
 			for (int i = start; i < end; i++)
 			{
 				this->item(i)->setHidden(false);
@@ -338,7 +565,7 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		{
 			static_cast<QLabel*>(this->widgetJudgeFolder->children().at(1))->setPixmap(QPixmap(this->pathOfFold));
 			int start = this->row(this->itemJudgeFolder) + 1;
-			int end = this->row(this->itemFillInTheBlanks);
+			int end = this->row(this->itemFillInTheBlanksFolder);
 			for (int i = start; i < end; i++)
 			{
 				this->item(i)->setHidden(true);
@@ -352,8 +579,8 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		if (this->isFillInTheBlanksFold)
 		{
 			static_cast<QLabel*>(this->widgetFillInTheBlanksFolder->children().at(1))->setPixmap(QPixmap(this->pathOfUnFold));
-			int start = this->row(this->itemFillInTheBlanks) + 1;
-			int end = this->row(this->itemSAQ);
+			int start = this->row(this->itemFillInTheBlanksFolder) + 1;
+			int end = this->row(this->itemSAQFolder);
 			for (int i = start; i < end; i++)
 			{
 				this->item(i)->setHidden(false);
@@ -362,8 +589,8 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		else
 		{
 			static_cast<QLabel*>(this->widgetFillInTheBlanksFolder->children().at(1))->setPixmap(QPixmap(this->pathOfFold));
-			int start = this->row(this->itemFillInTheBlanks) + 1;
-			int end = this->row(this->itemSAQ);
+			int start = this->row(this->itemFillInTheBlanksFolder) + 1;
+			int end = this->row(this->itemSAQFolder);
 			for (int i = start; i < end; i++)
 			{
 				this->item(i)->setHidden(true);
@@ -377,7 +604,7 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		if (this->isSAQFold)
 		{
 			static_cast<QLabel*>(this->widgetSAQFolder->children().at(1))->setPixmap(QPixmap(this->pathOfUnFold));
-			int start = this->row(this->itemSAQ) + 1;
+			int start = this->row(this->itemSAQFolder) + 1;
 			int end = this->count();
 			for (int i = start; i < end; i++)
 			{
@@ -387,7 +614,7 @@ void ExerciseList::slotItemClicked(QListWidgetItem * item)
 		else
 		{
 			static_cast<QLabel*>(this->widgetSAQFolder->children().at(1))->setPixmap(QPixmap(this->pathOfFold));
-			int start = this->row(this->itemSAQ) + 1;
+			int start = this->row(this->itemSAQFolder) + 1;
 			int end = this->count();
 			for (int i = start; i < end; i++)
 			{

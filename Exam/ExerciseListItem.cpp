@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ExerciseListItem.h"
 
-
+QString ExerciseListItem::PATHOFADDTOERRORBOOKICONPATH = QString::fromLocal8Bit("addToErrorBook.png");
 ExerciseListItem::ExerciseListItem()
 {
 	this->mapFinished = QPixmap(SystemVariable::getIconPath() + QString::fromLocal8Bit("finished.png"));
@@ -45,6 +45,11 @@ void ExerciseListItem::setStatus(Exercise::ExerciseStatus status)
 	{
 		this->setIcon(QIcon(this->mapHalf));
 	}
+}
+
+void ExerciseListItem::setText(QString text)
+{
+	this->QListWidgetItem::setText("    " + text);
 }
 
 Exercise::ExerciseStatus ExerciseListItem::getStatus()

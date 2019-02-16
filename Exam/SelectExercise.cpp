@@ -27,8 +27,14 @@ SelectExercise::SelectExercise(QWidget *parent, Qt::WindowFlags flags)
 	layout->addWidget(widgetButton);
 	this->setCentralWidget(new QWidget());
 	this->centralWidget()->setLayout(layout);
-
-	QNetworkAccessManager* http = new QNetworkAccessManager(this);
+	QListWidgetItem *item = new QListWidgetItem();
+	QFont font = item->font();
+	font.setFamily(QString::fromLocal8Bit(SystemVariable::FONTFAMILY));
+	font.setPointSize(16);
+	item->setFont(font);
+	item->setSizeHint(QSize(this->listwidgetExerciseSet->width(), 42));
+	item->setText(CurrentUser::getUserName()+QString::fromLocal8Bit("µÄ´íÌâ±¾"));
+	this->listwidgetExerciseSet->addItem(item);	QNetworkAccessManager* http = new QNetworkAccessManager(this);
 	QNetworkRequest request;
 	QString url = QString("http://")
 		+ SystemVariable::SERVER
@@ -51,11 +57,20 @@ SelectExercise::~SelectExercise()
 
 void SelectExercise::slotSelectedExerciseSet()
 {
-	QString exerciseName = this->listwidgetExerciseSet->selectedItems().at(0)->text();
-	CurrentUser::getExerciseSet().setName(exerciseName);
-	GenerateExercise* generateExercise = new GenerateExercise(this);
-	generateExercise->show();
-	this->close();
+	if (this->listwidgetExerciseSet->selectedItems().at(0) == this->listwidgetExerciseSet->item(0))
+	{
+		ErrorBook* errorBook = new ErrorBook();
+		errorBook->show();
+		this->close();
+	}
+	else
+	{
+		QString exerciseName = this->listwidgetExerciseSet->selectedItems().at(0)->text();
+		CurrentUser::getExerciseSet().setName(exerciseName);
+		GenerateExercise* generateExercise = new GenerateExercise(this);
+		generateExercise->show();
+		this->close();
+	}
 }
 
 void SelectExercise::slotBackToLogin()

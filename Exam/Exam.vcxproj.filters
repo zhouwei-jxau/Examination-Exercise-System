@@ -154,6 +154,18 @@
     <ClCompile Include="Analysis.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
+    <ClCompile Include="ExerciseTable.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorBook.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorExercise.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="LineEditWithTag.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemVariable.h">
@@ -193,6 +205,15 @@
       <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="Analysis.h">
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="ExerciseTable.h">
+      <Filter>Header Files\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorExercise.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="LineEditWithTag.h">
       <Filter>Header Files\Widget</Filter>
     </ClInclude>
   </ItemGroup>
@@ -241,6 +262,9 @@
     </QtMoc>
     <QtMoc Include="AnswerSAQ.h">
       <Filter>Header Files\Widget</Filter>
+    </QtMoc>
+    <QtMoc Include="ErrorBook.h">
+      <Filter>Header Files\Interface</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

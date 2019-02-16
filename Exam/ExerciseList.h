@@ -20,8 +20,12 @@ public:
 	void setShowCheckResult(bool show);
 	bool isShowCheckResult();
 	~ExerciseList();
+signals:
+	void signalAddToErrorBookClicked();
 private slots:
 	void slotItemClicked(QListWidgetItem* item);
+	void slotAddToErrorBookClicked(QAbstractButton *button);
+	void slotGetAddtoErrorBookStatus(QNetworkReply* reply);
 private:
 	int numOfChoice;
 	int numOfJudge;
@@ -30,8 +34,8 @@ private:
 
 	QListWidgetItem* itemChoiceFolder;
 	QListWidgetItem* itemJudgeFolder;
-	QListWidgetItem* itemFillInTheBlanks;
-	QListWidgetItem* itemSAQ;
+	QListWidgetItem* itemFillInTheBlanksFolder;
+	QListWidgetItem* itemSAQFolder;
 	QWidget* widgetChoiceFolder;
 	QWidget* widgetJudgeFolder;
 	QWidget* widgetFillInTheBlanksFolder;
@@ -47,5 +51,8 @@ private:
 
 	QList<QListWidgetItem*> unSubjectItems;
 	bool showCheckResult;
+
+	QButtonGroup* buttonGroup;
+	QHash<QPushButton*, int> addToErrorBookButtonIndexInExerciseSet;
 };
 

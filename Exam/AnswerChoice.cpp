@@ -20,6 +20,7 @@ void AnswerChoice::fill(QList<QString> list)
 		QWidget* w = new QWidget();
 		w->setLayout(new QHBoxLayout());
 		QRadioButton* radioButton = new QRadioButton();
+		buttons.append(radioButton);
 		options.insert(radioButton, 'A' + i);
 		radioButton->setFixedWidth(20);
 		this->group->addButton(radioButton);
@@ -48,7 +49,8 @@ void AnswerChoice::setAnswer(QString answer)
 	if (answer == "")
 		return;
 	QList<QRadioButton*> radioButtons = options.keys();
-	radioButtons.at(answer.at(0).unicode() - 'A')->setChecked(true);
+	char ans = *answer.toLocal8Bit().toStdString().c_str();
+	buttons.at(ans - 'A')->setChecked(true);
 }
 
 void AnswerChoice::setAnswer(QVariant answer)
