@@ -7,7 +7,7 @@ ExamClient::ExamClient(QWidget *parent)
 	this->currentExerciseIndex = 0;
 	this->currentExerciseItemIndex = 1;
 	this->setWindowTitle(QString::fromLocal8Bit("¿¼ÊÔ¿Í»§¶Ë"));
-	this->setWindowState(Qt::WindowState::WindowMaximized);
+	this->setWindowState(Qt::WindowState::WindowFullScreen);
 	this->setAttribute(Qt::WA_DeleteOnClose, true);
 	this->setCentralWidget(new QWidget());
 	this->imageHeadpartrait = new QLabel();
