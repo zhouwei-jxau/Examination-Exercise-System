@@ -74,17 +74,17 @@ void Regist::slotRegist()
 	QObject::connect(httpManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(requestFinished(QNetworkReply*)));
 	QString url = QString("http://") + SystemVariable::SERVER + ":" + QString::number(SystemVariable::SERVERPORT) + "/" + SystemVariable::REGISTSERVLET;
 	request.setUrl(url);
-	request.setHeader(QNetworkRequest::KnownHeaders::ContentTypeHeader, "application/x-www-form-urlencoded");
+	request.setHeader(QNetworkRequest::KnownHeaders::ContentTypeHeader, "application/x-www-form-urlencoded;charset=utf-8");
 	QCryptographicHash md5(QCryptographicHash::Md5);
 	md5.addData(this->editPassword->text().toLocal8Bit());
-	reply = httpManager->post(request,("username="+this->editUsername->text()+"&password="+md5.result().toHex()).toLocal8Bit());
+	QTextCodec* utf8 = QTextCodec::codecForName("UTF-8");
+	reply = httpManager->post(request,utf8->fromUnicode("username="+this->editUsername->text()+"&password="+md5.result().toHex()));
 }
 
 void Regist::requestFinished(QNetworkReply*reply)
 {
 	QByteArray data=reply->readAll();
-	QString msg = QString(data);
-	QJsonDocument jsonDocument=QJsonDocument::fromJson(msg.toLocal8Bit());
+	QJsonDocument jsonDocument=QJsonDocument::fromJson(data);
 	QJsonObject jsonObejct=jsonDocument.object();
 	int responseCode=jsonObejct.value("responseCode").toInt();
 	if (!responseCode)
