@@ -12,6 +12,7 @@ public:
 	const static char* const GETEXERCISESERVLET;
 	const static char* const ADDTOERRORBOOKSERVLET;
 	const static char* const GETERROREXERCISESERVLET;
+	const static char* const EDITERROREXERCISEMARKSERVLET;
 	const static char* const CONFIGPATH;
 	const static char* const USERFILENAME;
 	const static char* const RESOURCEPATH;

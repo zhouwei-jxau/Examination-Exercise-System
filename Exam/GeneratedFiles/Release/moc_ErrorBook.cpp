@@ -20,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ErrorBook_t {
-    QByteArrayData data[12];
-    char stringdata0[170];
+    QByteArrayData data[14];
+    char stringdata0[201];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,14 +41,17 @@ QT_MOC_LITERAL(7, 97, 17), // "slotAnswerChanged"
 QT_MOC_LITERAL(8, 115, 20), // "slotGetErrorExercise"
 QT_MOC_LITERAL(9, 136, 14), // "QNetworkReply*"
 QT_MOC_LITERAL(10, 151, 5), // "reply"
-QT_MOC_LITERAL(11, 157, 12) // "slotGenerate"
+QT_MOC_LITERAL(11, 157, 17), // "slotGetSaveStatus"
+QT_MOC_LITERAL(12, 175, 12), // "slotGenerate"
+QT_MOC_LITERAL(13, 188, 12) // "slotSaveMark"
 
     },
     "ErrorBook\0signalUserCommit\0\0"
     "slotExerciseSelected\0QListWidgetItem*\0"
     "item\0slotExerciseDoubleClicked\0"
     "slotAnswerChanged\0slotGetErrorExercise\0"
-    "QNetworkReply*\0reply\0slotGenerate"
+    "QNetworkReply*\0reply\0slotGetSaveStatus\0"
+    "slotGenerate\0slotSaveMark"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +61,7 @@ static const uint qt_meta_data_ErrorBook[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,14 +69,16 @@ static const uint qt_meta_data_ErrorBook[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x06 /* Public */,
+       1,    0,   54,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   45,    2, 0x08 /* Private */,
-       6,    1,   48,    2, 0x08 /* Private */,
-       7,    0,   51,    2, 0x08 /* Private */,
-       8,    1,   52,    2, 0x08 /* Private */,
-      11,    0,   55,    2, 0x08 /* Private */,
+       3,    1,   55,    2, 0x08 /* Private */,
+       6,    1,   58,    2, 0x08 /* Private */,
+       7,    0,   61,    2, 0x08 /* Private */,
+       8,    1,   62,    2, 0x08 /* Private */,
+      11,    1,   65,    2, 0x08 /* Private */,
+      12,    0,   68,    2, 0x08 /* Private */,
+      13,    0,   69,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -83,6 +88,8 @@ static const uint qt_meta_data_ErrorBook[] = {
     QMetaType::Void, 0x80000000 | 4,    5,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -99,7 +106,9 @@ void ErrorBook::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 2: _t->slotExerciseDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         case 3: _t->slotAnswerChanged(); break;
         case 4: _t->slotGetErrorExercise((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
-        case 5: _t->slotGenerate(); break;
+        case 5: _t->slotGetSaveStatus((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 6: _t->slotGenerate(); break;
+        case 7: _t->slotSaveMark(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -140,13 +149,13 @@ int ErrorBook::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }

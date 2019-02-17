@@ -29,7 +29,9 @@ private slots:
 	void slotExerciseDoubleClicked(QListWidgetItem* item);
 	void slotAnswerChanged();
 	void slotGetErrorExercise(QNetworkReply* reply);
+	void slotGetSaveStatus(QNetworkReply* reply);
 	void slotGenerate();
+	void slotSaveMark();
 private:
 	QLabel* imageHeadpartrait;
 	QLabel* labelUserName;
@@ -37,6 +39,7 @@ private:
 	QLabel* labelTitle;
 	QLabel* labelTip;
 	QPushButton* buttonGenerate;
+	QPushButton* buttonSaveMark;
 	QTextEdit* texteditSubject;
 	QTextEdit* texteditMark;
 	QWidget* widgetAnswer;

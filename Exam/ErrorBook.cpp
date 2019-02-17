@@ -81,8 +81,14 @@ ErrorBook::ErrorBook()
 	font.setPointSize(14);
 	this->texteditSubject->setReadOnly(true);
 	this->texteditSubject->setFont(font);
+	QWidget* widgetMark = new QWidget();
+	widgetMark->setLayout(new QVBoxLayout());
 	this->texteditMark = new QTextEdit();
 	this->texteditMark->setFont(font);
+	widgetMark->layout()->addWidget(this->texteditMark);
+	this->buttonSaveMark = new QPushButton(QString::fromLocal8Bit("保存"));
+	connect(this->buttonSaveMark, SIGNAL(clicked()), this, SLOT(slotSaveMark()));
+	widgetMark->layout()->addWidget(this->buttonSaveMark);
 	QTabWidget* tableWidget = new QTabWidget();
 	tableWidget->setContentsMargins(0, 0, 0, 0);
 	//
@@ -145,7 +151,7 @@ ErrorBook::ErrorBook()
 	generateSetting->layout()->addWidget(widget);
 	//
 	tableWidget->insertTab(0, this->texteditSubject, QString::fromLocal8Bit("题目"));
-	tableWidget->insertTab(1, this->texteditMark, QString::fromLocal8Bit("笔记"));
+	tableWidget->insertTab(1, widgetMark, QString::fromLocal8Bit("笔记"));
 	tableWidget->insertTab(2, generateSetting, QString::fromLocal8Bit("生成设置"));
 
 	this->widgetAnswer = new QWidget();
@@ -371,6 +377,37 @@ void ErrorBook::slotGetErrorExercise(QNetworkReply * reply)
 	this->setCollection(this->errorExerciseList.size());
 }
 
+void ErrorBook::slotGetSaveStatus(QNetworkReply * reply)
+{
+	QByteArray data;
+	QByteArray buffer;
+	while ((buffer = reply->readLine()).length() > 0)
+	{
+		data.append(buffer);
+	}
+	if (reply->attribute(QNetworkRequest::Attribute::HttpStatusCodeAttribute).toInt() != 200)
+	{
+		QMessageBox messageBox;
+		messageBox.about(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("无法连接到服务器，请检查网络连接!"));
+		return;
+	}
+	QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+	int responseCode = jsonDoc.object().value("responseCode").toInt();
+	if (responseCode)
+	{
+		QMessageBox messageBox;
+		messageBox.about(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("保存失败，请检查网络连接!"));
+		return;
+	}
+	else
+	{
+		QMessageBox messageBox;
+		messageBox.about(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("保存成功"));
+		return;
+	}
+	
+}
+
 void ErrorBook::slotGenerate()
 {
 	QString subject=this->subject->getText();
@@ -437,4 +474,20 @@ void ErrorBook::slotGenerate()
 	ExamClient* client = new ExamClient();
 	client->show();
 	this->close();
+}
+
+void ErrorBook::slotSaveMark()
+{
+	QNetworkAccessManager* httpManager = new QNetworkAccessManager(this);
+	QObject::connect(httpManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotGetSaveStatus(QNetworkReply*)));
+	QString url = QString("http://") + SystemVariable::SERVER + ":" + QString::number(SystemVariable::SERVERPORT) + "/" + SystemVariable::EDITERROREXERCISEMARKSERVLET;
+	QNetworkRequest request;
+	request.setUrl(url);
+	request.setHeader(QNetworkRequest::KnownHeaders::ContentTypeHeader, "application/x-www-form-urlencoded;charset=utf-8");
+	QString param = QString::fromLocal8Bit("account=") + CurrentUser::getAccount()
+		+QString::fromLocal8Bit("&exercise_no=")+QString::number(this->errorExerciseList.at(static_cast<ExerciseListItem*>(this->listwidgetExercise->currentItem())->getIndexInExerciseSet())->getExercise()->getExerciseNo())
+		+QString::fromLocal8Bit("&exercise_type=")+QString::number(this->errorExerciseList.at(static_cast<ExerciseListItem*>(this->listwidgetExercise->currentItem())->getIndexInExerciseSet())->getExercise()->getType())
+		+QString::fromLocal8Bit("&exercise_mark=")+this->texteditMark->toPlainText();
+	QTextCodec* utf8 = QTextCodec::codecForName("utf-8");
+	httpManager->post(request,utf8->fromUnicode(param));
 }
